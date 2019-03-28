@@ -12,6 +12,8 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Security;
 using System.Windows.Forms;
 
 namespace Odds_Grabber___wclub888
@@ -36,7 +38,7 @@ namespace Odds_Grabber___wclub888
         private int __b = 96;
         private bool __is_close;
         private bool __is_login = false;
-        private bool __is_send = true;
+        private bool __is_send = false;
         Form __mainFormHandler;
 
         // Drag Header to Move
@@ -546,17 +548,17 @@ namespace Odds_Grabber___wclub888
                                         element.InvokeMember("click");
                                     }
                                 }
-                                //webBrowser.Visible = false;
-                                webBrowser.WebBrowserShortcutsEnabled = true;
                                 
-                                webBrowser.Visible = false;
-                                pictureBox_loader.Visible = true;
+                                //webBrowser.Visible = false;
+                                //pictureBox_loader.Visible = true;
                                 webBrowser.WebBrowserShortcutsEnabled = false;
 
                                 SendABCTeam("Firing up!");
                             }
                             else
                             {
+                                //int _epoch = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
+                                //webBrowser.Navigate("http://sports.wclub888.com/_View/RMOdds2GenRun.aspx?ot=t&update=false&sa=false&tv=0&tf=-1&TFStatus=0&mt=0&r=1038308059&t=" + _epoch + "&RId=0&_=" + _epoch);
                                 Task task_01 = new Task(delegate { ___SSPORTS_RUNNINGAsync(); });
                                 task_01.Start();
                                 //Task task_02 = new Task(delegate { ___MSPORTS_RUNNINGAsync(); });
@@ -597,22 +599,28 @@ namespace Odds_Grabber___wclub888
         // S-SPORTS -----
         private void ___SSPORTS_RUNNINGAsync()
         {
-            Invoke(new Action(() =>
-            {
-                panel3.BackColor = Color.FromArgb(0, 255, 0);
-            }));
-
             try
             {
                 string source_name = __website_name + __running_01;
-                var cookie = Cookie.GetCookieInternal(webBrowser.Url, false);
+                Uri uriAddress = new Uri("http://sports.wclub888.com");
+                var cookie = Cookies.GetCookieInternal(uriAddress, false);
                 WebClient wc = new WebClient();
-                wc.Headers.Add("Cookie", cookie);
+                var request = HttpContext.Current.Request;
+                HttpCookie authCookie = request.Cookies[FormsAuthentication.FormsCookieName];//.ASPXAUTH
+                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                MessageBox.Show(authTicket.Name);
+                string asdsd = ".ASPXAUTH=6B6418335296A7F9081B4E2B08880F4E22FBC8DC67BE1E86388368DC3ABA3CC7472331585DB7A3245CC3C58074B90FD405FC71D4119ED5093D40E18A10AE2839687C4D9EFC127B84CA1AB0A2B7EB30602191427179549468CE6AEB0E0901B749EB344DB42125A19FE9D7BA32B433127FEC7FADEAB3D687CCD898641B1FF44D3C51477521;";
+                MessageBox.Show(asdsd + cookie);
+                wc.Headers.Add("Cookie", asdsd + cookie);
                 wc.Encoding = Encoding.UTF8;
+                wc.Headers.Add("Accept-Language", "en-US,en;q=0.9");
+                wc.Headers["X-Requested-With"] = "XMLHttpRequest";
+                wc.Headers.Add("Referer", "http://sports.wclub888.com/_View/RMOdds2.aspx?ot=t&wd=");
+                wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/7.0; .NET4.0C; .NET4.0E)");
                 wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-                int _epoch = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
+                //int _epoch = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
 
-                byte[] result = wc.DownloadData("http://sports.wclub888.com/_View/RMOdds2GenRun.aspx?ot=t&update=false&sa=false&tv=0&tf=-1&TFStatus=0&mt=0&r=342146139&t=" + _epoch + "&RId=0&_=");
+                byte[] result = wc.DownloadData("http://sports.wclub888.com/_View/RMOdds2GenRun.aspx?ot=t&update=false&sa=false&tv=0&tf=-1&TFStatus=0&mt=0&r=1038308059&t=" + _epoch + "&RId=0&_=" + _epoch);
                 string responsebody = Encoding.UTF8.GetString(result);
                 MessageBox.Show(responsebody);
                 var deserialize_object = JsonConvert.DeserializeObject(responsebody);
@@ -821,7 +829,7 @@ namespace Odds_Grabber___wclub888
             try
             {
                 string source_name = __website_name + __running_01;
-                var cookie = Cookie.GetCookieInternal(webBrowser.Url, false);
+                var cookie = Cookies.GetCookieInternal(webBrowser.Url, false);
                 WebClient wc = new WebClient();
                 wc.Headers.Add("Cookie", cookie);
                 wc.Encoding = Encoding.UTF8;
@@ -1042,7 +1050,7 @@ namespace Odds_Grabber___wclub888
             try
             {
                 string source_name = __website_name + "m";
-                var cookie = Cookie.GetCookieInternal(webBrowser.Url, false);
+                var cookie = Cookies.GetCookieInternal(webBrowser.Url, false);
                 WebClient wc = new WebClient();
                 wc.Headers.Add("Cookie", cookie);
                 wc.Encoding = Encoding.UTF8;
@@ -1124,7 +1132,7 @@ namespace Odds_Grabber___wclub888
             try
             {
                 string source_name = __website_name + "m";
-                var cookie = Cookie.GetCookieInternal(webBrowser.Url, false);
+                var cookie = Cookies.GetCookieInternal(webBrowser.Url, false);
                 WebClient wc = new WebClient();
                 wc.Headers.Add("Cookie", cookie);
                 wc.Encoding = Encoding.UTF8;
@@ -1227,6 +1235,8 @@ namespace Odds_Grabber___wclub888
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int _epoch = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
+            textBox1.Text = _epoch.ToString();
             //WebClient wc = new WebClient();
 
             //string password = __website_name + __running_01 + __api_key;
@@ -1325,8 +1335,8 @@ namespace Odds_Grabber___wclub888
 
         private void timer_size_Tick(object sender, EventArgs e)
         {
-            __mainFormHandler = Application.OpenForms[0];
-            __mainFormHandler.Size = new Size(466, 168);
+            //__mainFormHandler = Application.OpenForms[0];
+            //__mainFormHandler.Size = new Size(466, 168);
         }
 
         public bool __is_numeric(string value)

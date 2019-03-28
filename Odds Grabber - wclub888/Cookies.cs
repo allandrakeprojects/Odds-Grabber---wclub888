@@ -37,7 +37,7 @@ namespace Odds_Grabber___wclub888
         #endregion
     }
 
-    public class Cookie : WebBrowser
+    public class Cookies : WebBrowser
     {
         [SecurityCritical]
         public static string GetCookieInternal(Uri uri, bool throwIfNoCookie)
