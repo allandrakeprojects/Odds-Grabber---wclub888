@@ -684,8 +684,29 @@ namespace Odds_Grabber___wclub888
                         }
                         catch (Exception err)
                         {
-                            Process.Start(Application.ExecutablePath);
-                            Environment.Exit(0);
+                            __send++;
+
+                            if (___CheckForInternetConnection())
+                            {
+                                if (__send == 5)
+                                {
+                                    SendMyBot(err.ToString());
+                                    __is_close = false;
+                                    Process.Start(Application.ExecutablePath);
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    WebClient wc_ = new WebClient();
+                                    byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
+                                    string responsebody_ = Encoding.UTF8.GetString(result_);
+                                }
+                            }
+                            else
+                            {
+                                __is_close = false;
+                                Environment.Exit(0);
+                            }
                         }
 
                         //Task task_send = new Task(delegate {
@@ -1001,8 +1022,29 @@ namespace Odds_Grabber___wclub888
                         }
                         catch (Exception err)
                         {
-                            Process.Start(Application.ExecutablePath);
-                            Environment.Exit(0);
+                            __send++;
+
+                            if (___CheckForInternetConnection())
+                            {
+                                if (__send == 5)
+                                {
+                                    SendMyBot(err.ToString());
+                                    __is_close = false;
+                                    Process.Start(Application.ExecutablePath);
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    WebClient wc_ = new WebClient();
+                                    byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
+                                    string responsebody_ = Encoding.UTF8.GetString(result_);
+                                }
+                            }
+                            else
+                            {
+                                __is_close = false;
+                                Environment.Exit(0);
+                            }
                         }
 
                         //Task task_send = new Task(delegate {
@@ -1420,8 +1462,29 @@ namespace Odds_Grabber___wclub888
                             }
                             catch (Exception err)
                             {
-                                Process.Start(Application.ExecutablePath);
-                                Environment.Exit(0);
+                                __send++;
+
+                                if (___CheckForInternetConnection())
+                                {
+                                    if (__send == 5)
+                                    {
+                                        SendMyBot(err.ToString());
+                                        __is_close = false;
+                                        Process.Start(Application.ExecutablePath);
+                                        Environment.Exit(0);
+                                    }
+                                    else
+                                    {
+                                        WebClient wc_ = new WebClient();
+                                        byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
+                                        string responsebody_ = Encoding.UTF8.GetString(result_);
+                                    }
+                                }
+                                else
+                                {
+                                    __is_close = false;
+                                    Environment.Exit(0);
+                                }
                             }
 
                             //Task task_send = new Task(delegate {
@@ -1763,8 +1826,29 @@ namespace Odds_Grabber___wclub888
                                 }
                                 catch (Exception err)
                                 {
-                                    Process.Start(Application.ExecutablePath);
-                                    Environment.Exit(0);
+                                    __send++;
+
+                                    if (___CheckForInternetConnection())
+                                    {
+                                        if (__send == 5)
+                                        {
+                                            SendMyBot(err.ToString());
+                                            __is_close = false;
+                                            Process.Start(Application.ExecutablePath);
+                                            Environment.Exit(0);
+                                        }
+                                        else
+                                        {
+                                            WebClient wc_ = new WebClient();
+                                            byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
+                                            string responsebody_ = Encoding.UTF8.GetString(result_);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        __is_close = false;
+                                        Environment.Exit(0);
+                                    }
                                 }
 
                                 //Task task_send = new Task(delegate {
@@ -1911,28 +1995,21 @@ namespace Odds_Grabber___wclub888
             }
             catch (Exception err)
             {
+                __send++;
+
                 if (___CheckForInternetConnection())
                 {
-                    Properties.Settings.Default.______odds_iswaiting_01 = true;
-                    Properties.Settings.Default.Save();
-
-                    if (err.ToString().Contains("(50"))
+                    if (__send == 5)
                     {
-                        if (!Properties.Settings.Default.______odds_issend_01)
-                        {
-                            Properties.Settings.Default.______odds_issend_01 = true;
-                            Properties.Settings.Default.Save();
-                            SendABCTeam(__running_11 + " Under Maintenance.");
-                        }
-
-                        ___FIRST_NOTRUNNINGAsync();
+                        SendMyBot(err.ToString());
+                        __is_close = false;
+                        Process.Start(Application.ExecutablePath);
+                        Environment.Exit(0);
                     }
-
-                    SendMyBot(err.ToString());
-
-                    __is_close = false;
-                    Process.Start(Application.ExecutablePath);
-                    Environment.Exit(0);
+                    else
+                    {
+                        ___DetectRunning();
+                    }
                 }
                 else
                 {
@@ -1970,28 +2047,21 @@ namespace Odds_Grabber___wclub888
             }
             catch (Exception err)
             {
+                __send++;
+
                 if (___CheckForInternetConnection())
                 {
-                    Properties.Settings.Default.______odds_iswaiting_01 = true;
-                    Properties.Settings.Default.Save();
-
-                    if (err.ToString().Contains("(50"))
+                    if (__send == 5)
                     {
-                        if (!Properties.Settings.Default.______odds_issend_01)
-                        {
-                            Properties.Settings.Default.______odds_issend_01 = true;
-                            Properties.Settings.Default.Save();
-                            SendABCTeam(__running_11 + " Under Maintenance.");
-                        }
-
-                        ___FIRST_NOTRUNNINGAsync();
+                        SendMyBot(err.ToString());
+                        __is_close = false;
+                        Process.Start(Application.ExecutablePath);
+                        Environment.Exit(0);
                     }
-
-                    SendMyBot(err.ToString());
-
-                    __is_close = false;
-                    Process.Start(Application.ExecutablePath);
-                    Environment.Exit(0);
+                    else
+                    {
+                        ___DetectRunning2();
+                    }
                 }
                 else
                 {
@@ -2071,11 +2141,21 @@ namespace Odds_Grabber___wclub888
             }
             catch (Exception err)
             {
+                __send++;
+
                 if (___CheckForInternetConnection())
                 {
-                    __is_close = false;
-                    Process.Start(Application.ExecutablePath);
-                    Environment.Exit(0);
+                    if (__send == 5)
+                    {
+                        SendMyBot(err.ToString());
+                        __is_close = false;
+                        Process.Start(Application.ExecutablePath);
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        SendMyBot(message);
+                    }
                 }
                 else
                 {
@@ -2109,11 +2189,21 @@ namespace Odds_Grabber___wclub888
             }
             catch (Exception err)
             {
+                __send++;
+
                 if (___CheckForInternetConnection())
                 {
-                    __is_close = false;
-                    Process.Start(Application.ExecutablePath);
-                    Environment.Exit(0);
+                    if (__send == 5)
+                    {
+                        SendMyBot(err.ToString());
+                        __is_close = false;
+                        Process.Start(Application.ExecutablePath);
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        SendABCTeam(message);
+                    }
                 }
                 else
                 {
