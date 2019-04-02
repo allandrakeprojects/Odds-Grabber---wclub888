@@ -2042,7 +2042,7 @@ namespace Odds_Grabber___wclub888
 
         private void __Flag()
         {
-            string _flag = Path.Combine(Path.GetTempPath(), __website_name + ".txt");
+            string _flag = Path.Combine(Path.GetTempPath(), __app + " - " + __website_name + ".txt");
             using (StreamWriter sw = new StreamWriter(_flag, true))
             {
                 sw.WriteLine("<<>>" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "<<>>");
