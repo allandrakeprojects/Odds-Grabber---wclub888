@@ -32,7 +32,7 @@ namespace Odds_Grabber___wclub888
         private string __api_key = "youdieidie";
         private string __running_01 = "wft";
         private string __running_02 = "tbs";
-        private string __running_11 = "WTF";
+        private string __running_11 = "WFT";
         private string __running_22 = "TBS";
         private int __send = 0;
         private int __r = 14;
@@ -171,9 +171,6 @@ namespace Odds_Grabber___wclub888
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
-
-            //Properties.Settings.Default.______last_bill_no = "";
-            //Properties.Settings.Default.Save();
         }
         private void panel2_MouseDown(object sender, MouseEventArgs e)
         {
@@ -242,6 +239,37 @@ namespace Odds_Grabber___wclub888
             WindowState = FormWindowState.Minimized;
         }
 
+        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true, CharSet = CharSet.Unicode)]
+        static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+
+        const UInt32 WM_CLOSE = 0x0010;
+
+        void ___CloseMessageBox()
+        {
+            IntPtr windowPtr = FindWindowByCaption(IntPtr.Zero, "JavaScript Alert - http://wclub888.com");
+
+            if (windowPtr == IntPtr.Zero)
+            {
+                return;
+            }
+
+            SendMessage(windowPtr, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        private void timer_close_message_box_Tick(object sender, EventArgs e)
+        {
+            ___CloseMessageBox();
+        }
+
+        private void timer_size_Tick(object sender, EventArgs e)
+        {
+            __mainFormHandler = Application.OpenForms[0];
+            __mainFormHandler.Size = new Size(466, 168);
+        }
+
         // Form Closing
         private void Main_Form_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -274,6 +302,282 @@ namespace Odds_Grabber___wclub888
             InitializeChromium();
         }
 
+        private void panel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            label1.Visible = true;
+        }
+
+        private void panel2_MouseClick(object sender, MouseEventArgs e)
+        {
+            label1.Visible = false;
+        }
+
+        private void panel3_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void panel4_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void panel1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (__is_send)
+            {
+                __is_send = false;
+                MessageBox.Show("Telegram Notification is Disabled.", __brand_code + " " + __app, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                __is_send = true;
+                MessageBox.Show("Telegram Notification is Enabled.", __brand_code + " " + __app, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void timer_landing_Tick(object sender, EventArgs e)
+        {
+            panel_landing.Visible = false;
+            panel_cefsharp.Visible = false;
+            pictureBox_loader.Visible = true;
+            panel3.Visible = true;
+            panel4.Visible = true;
+            timer_size.Start();
+            timer_landing.Stop();
+        }
+
+        public static void ___FlushMemory()
+        {
+            Process prs = Process.GetCurrentProcess();
+            try
+            {
+                prs.MinWorkingSet = (IntPtr)(300000);
+            }
+            catch (Exception err)
+            {
+                // leave blank
+            }
+        }
+
+        private void timer_flush_memory_Tick(object sender, EventArgs e)
+        {
+            ___FlushMemory();
+        }
+
+        private void SendMyBot(string message)
+        {
+            try
+            {
+                string datetime = DateTime.Now.ToString("dd MMM HH:mm:ss");
+                string urlString = "https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}";
+                string apiToken = "772918363:AAHn2ufmP3ocLEilQ1V-IHcqYMcSuFJHx5g";
+                string chatId = "@allandrake";
+                string text = "-----" + __app__website_name + "-----%0A%0AIP:%20ABC PC%0ALocation:%20Pacific%20Star%0ADate%20and%20Time:%20[" + datetime + "]%0AMessage:%20" + message;
+                urlString = String.Format(urlString, apiToken, chatId, text);
+                WebRequest request = WebRequest.Create(urlString);
+                Stream rs = request.GetResponse().GetResponseStream();
+                StreamReader reader = new StreamReader(rs);
+                string line = "";
+                StringBuilder sb = new StringBuilder();
+                while (line != null)
+                {
+                    line = reader.ReadLine();
+                    if (line != null)
+                        sb.Append(line);
+                }
+            }
+            catch (Exception err)
+            {
+                __send++;
+
+                if (___CheckForInternetConnection())
+                {
+                    if (__send == 5)
+                    {
+                        SendMyBot(err.ToString());
+                        __is_close = false;
+                        Process.Start(Application.ExecutablePath);
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        SendMyBot(message);
+                    }
+                }
+                else
+                {
+                    __is_close = false;
+                    Environment.Exit(0);
+                }
+            }
+        }
+
+        private void SendABCTeam(string message)
+        {
+            try
+            {
+                string datetime = DateTime.Now.ToString("dd MMM HH:mm:ss");
+                string urlString = "https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}";
+                string apiToken = "651945130:AAGMFj-C4wX0yElG2dBU1SRbfrNZi75jPHg";
+                string chatId = "@odds_bot_abc_team";
+                string text = "Bot:%20-----" + __website_name.ToUpper() + "-----%0ADate%20and%20Time:%20[" + datetime + "]%0AMessage:%20<b>" + message + "</>&parse_mode=html";
+                urlString = String.Format(urlString, apiToken, chatId, text);
+                WebRequest request = WebRequest.Create(urlString);
+                Stream rs = request.GetResponse().GetResponseStream();
+                StreamReader reader = new StreamReader(rs);
+                string line = "";
+                StringBuilder sb = new StringBuilder();
+                while (line != null)
+                {
+                    line = reader.ReadLine();
+                    if (line != null)
+                        sb.Append(line);
+                }
+            }
+            catch (Exception err)
+            {
+                __send++;
+
+                if (___CheckForInternetConnection())
+                {
+                    if (__send == 5)
+                    {
+                        SendMyBot(err.ToString());
+                        __is_close = false;
+                        Process.Start(Application.ExecutablePath);
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        SendABCTeam(message);
+                    }
+                }
+                else
+                {
+                    __is_close = false;
+                    Environment.Exit(0);
+                }
+            }
+        }
+
+        private void timer_detect_running_Tick(object sender, EventArgs e)
+        {
+            ___DetectRunningAsync();
+        }
+
+        private async void ___DetectRunningAsync()
+        {
+            try
+            {
+                string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                string password = __brand_code + datetime + "youdieidie";
+                byte[] encodedPassword = new UTF8Encoding().GetBytes(password);
+                byte[] hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(encodedPassword);
+                string token = BitConverter.ToString(hash)
+                   .Replace("-", string.Empty)
+                   .ToLower();
+
+                using (var wb = new WebClient())
+                {
+                    var data = new NameValueCollection
+                    {
+                        ["brand_code"] = __brand_code,
+                        ["app_type"] = __app_type,
+                        ["last_update"] = datetime,
+                        ["token"] = token
+                    };
+
+                    var response = wb.UploadValues("http://192.168.10.252:8080/API/updateAppStatus", "POST", data);
+                    string responseInString = Encoding.UTF8.GetString(response);
+                }
+            }
+            catch (Exception err)
+            {
+                __send++;
+
+                if (___CheckForInternetConnection())
+                {
+                    if (__send == 5)
+                    {
+                        SendMyBot(err.ToString());
+                        __is_close = false;
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        await ___TaskWait_Handler(10);
+                        ___DetectRunning2Async();
+                    }
+                }
+                else
+                {
+                    __is_close = false;
+                    Environment.Exit(0);
+                }
+            }
+        }
+
+        private async void ___DetectRunning2Async()
+        {
+            try
+            {
+                string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                string password = __brand_code + datetime + "youdieidie";
+                byte[] encodedPassword = new UTF8Encoding().GetBytes(password);
+                byte[] hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(encodedPassword);
+                string token = BitConverter.ToString(hash)
+                   .Replace("-", string.Empty)
+                   .ToLower();
+
+                using (var wb = new WebClient())
+                {
+                    var data = new NameValueCollection
+                    {
+                        ["brand_code"] = __brand_code,
+                        ["app_type"] = __app_type,
+                        ["last_update"] = datetime,
+                        ["token"] = token
+                    };
+
+                    var response = wb.UploadValues("http://zeus.ssitex.com:8080/API/updateAppStatus", "POST", data);
+                    string responseInString = Encoding.UTF8.GetString(response);
+                }
+            }
+            catch (Exception err)
+            {
+                __send++;
+
+                if (___CheckForInternetConnection())
+                {
+                    if (__send == 5)
+                    {
+                        SendMyBot(err.ToString());
+                        __is_close = false;
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        await ___TaskWait_Handler(10);
+                        ___DetectRunningAsync();
+                    }
+                }
+                else
+                {
+                    __is_close = false;
+                    Environment.Exit(0);
+                }
+            }
+        }
+
         // CefSharp Initialize
         private void InitializeChromium()
         {
@@ -283,55 +587,26 @@ namespace Odds_Grabber___wclub888
             Cef.Initialize(settings);
             chromeBrowser = new ChromiumWebBrowser("http://www.wclub888.com/Web/home.aspx");
             panel_cefsharp.Controls.Add(chromeBrowser);
-            chromeBrowser.AddressChanged += ChromiumBrowserAddressChangedAsync;
+            chromeBrowser.AddressChanged += ChromiumBrowserAddressChanged;
         }
 
-        static int LineNumber([System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0)
-        {
-            return lineNumber;
-        }
-
-        private bool __is_inserted = false;
         private int __first = 0;
         private int __second = 0;
 
         // CefSharp Address Changed
-        private async void ChromiumBrowserAddressChangedAsync(object sender, AddressChangedEventArgs e)
+        private void ChromiumBrowserAddressChanged(object sender, AddressChangedEventArgs e)
         {
             __url = e.Address.ToString();
+            Invoke(new Action(() =>
+            {
+                panel3.Visible = true;
+                panel4.Visible = true;
+            }));
+
+
             if (e.Address.ToString().Equals("http://www.wclub888.com/Web/home.aspx"))
             {
-                //if (!__is_login)
-                //{
-                //    MessageBox.Show("ghghg");
-                //    __is_login = true;
-                //}
-                //else
-                //{
-                //    await ___FIRST_RUNNINGAsync();
-                //}
-
-                //if (__is_login)
-                //{
-                //    Invoke(new Action(() =>
-                //    {
-                //        label_brand.Visible = false;
-                //        pictureBox_loader.Visible = false;
-                //        label_player_last_bill_no.Visible = false;
-                //        label_page_count.Visible = false;
-                //        label_currentrecord.Visible = false;
-                //        __mainFormHandler = Application.OpenForms[0];
-                //        __mainFormHandler.Size = new Size(466, 468);
-
-                //        SendITSupport("The application have been logout, please re-login again.");
-                //        SendMyBot("The application have been logout, please re-login again.");
-                //        __send = 0;
-                //        timer_pending.Stop();
-                //    }));
-                //}
-
-                //__is_login = false;
-                //timer.Stop();
+                __is_login = false;
                 Invoke(new Action(() =>
                 {
                     chromeBrowser.FrameLoadEnd += (sender_, args) =>
@@ -371,11 +646,12 @@ namespace Odds_Grabber___wclub888
                         {
                             Invoke(new Action(async () =>
                             {
-                                __second ++;
+                                __second++;
                                 if (__second == 1)
                                 {
-                                    Invoke(new Action(async () =>
+                                    Invoke(new Action(() =>
                                     {
+                                        __is_login = true;
                                         SendABCTeam("Firing up!");
 
                                         Task task_01 = new Task(delegate { ___FIRST_RUNNINGAsync(); });
@@ -389,42 +665,6 @@ namespace Odds_Grabber___wclub888
                     };
                 }));
             }
-        }
-
-        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true, CharSet = CharSet.Unicode)]
-        static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
-
-        const UInt32 WM_CLOSE = 0x0010;
-
-        void ___CloseMessageBox()
-        {
-            IntPtr windowPtr = FindWindowByCaption(IntPtr.Zero, "JavaScript Alert - http://103.4.104.8");
-
-            if (windowPtr == IntPtr.Zero)
-            {
-                return;
-            }
-
-            SendMessage(windowPtr, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
-        }
-
-        private void timer_landing_Tick(object sender, EventArgs e)
-        {
-            panel_landing.Visible = false;
-            panel_cefsharp.Visible = false;
-            pictureBox_loader.Visible = true;
-            panel3.Visible = true;
-            panel4.Visible = true;
-            timer_size.Start();
-            timer_landing.Stop();
-        }
-
-        private void timer_close_message_box_Tick(object sender, EventArgs e)
-        {
-            ___CloseMessageBox();
         }
 
         // ----- Functions
@@ -681,6 +921,7 @@ namespace Odds_Grabber___wclub888
                             WebClient wc_ = new WebClient();
                             byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
                             string responsebody_ = Encoding.UTF8.GetString(result_);
+                            __send = 0;
                         }
                         catch (Exception err)
                         {
@@ -692,11 +933,11 @@ namespace Odds_Grabber___wclub888
                                 {
                                     SendMyBot(err.ToString());
                                     __is_close = false;
-                                    Process.Start(Application.ExecutablePath);
                                     Environment.Exit(0);
                                 }
                                 else
                                 {
+                                    await ___TaskWait_Handler(10);
                                     WebClient wc_ = new WebClient();
                                     byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
                                     string responsebody_ = Encoding.UTF8.GetString(result_);
@@ -708,67 +949,22 @@ namespace Odds_Grabber___wclub888
                                 Environment.Exit(0);
                             }
                         }
-
-                        //Task task_send = new Task(delegate {
-                        //    try
-                        //    {
-                        //        WebClient wc_ = new WebClient();
-                        //        byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
-                        //        string responsebody_ = Encoding.UTF8.GetString(result_);
-                        //    }
-                        //    catch (Exception err)
-                        //    {
-
-                        //    }
-                        //});
-                        //task_send.Start();
-
-                        //MessageBox.Show("LeagueName: " + LeagueName.ToString() + "\n" +
-                        //                "HomeScore: " + HomeScore + "\n" +
-                        //                "AwayScore: " + AwayScore + "\n" +
-                        //                "MatchTimeHalf: " + MatchTimeHalf + "\n" +
-                        //                "MatchTimeMinute: " + MatchTimeMinute + "\n" +
-                        //                "HomeTeamName: " + HomeTeamName + "\n" +
-                        //                "AwayTeamName: " + AwayTeamName + "\n" +
-                        //                "MatchID: " + ref_match_id + "\n" +
-                        //                "StatementDate: " + StatementDate + "\n" +
-                        //                "KickOffDateTime: " + KickOffDateTime + "\n" +
-                        //                "FTHDP: " + FTHDP + "\n" +
-                        //                "FTH: " + FTH + "\n" +
-                        //                "FTA: " + FTA + "\n" +
-                        //                "FTOU: " + FTOU + "\n" +
-                        //                "FTO: " + FTO + "\n" +
-                        //                "FTU: " + FTU + "\n" +
-                        //                "FT1: " + FT1 + "\n" +
-                        //                "FTX: " + FTX + "\n" +
-                        //                "FT2: " + FT2 + "\n" +
-                        //                "FHHDP: " + FHHDP + "\n" +
-                        //                "FHH: " + FHH + "\n" +
-                        //                "FHA: " + FHA + "\n" +
-                        //                "FHOU: " + FHOU + "\n" +
-                        //                "FHO: " + FHO + "\n" +
-                        //                "FHU: " + FHU + "\n" +
-                        //                "FH1: " + FH1 + "\n" +
-                        //                "FHX: " + FHX + "\n" +
-                        //                "FH2: " + FH2 + "\n" +
-                        //                "_row_no: " + _row_no + "\n");
                     }
                 }
 
-
-
-                ___FIRST_NOTRUNNINGAsync();
                 __send = 0;
+                ___FIRST_NOTRUNNINGAsync();
             }
             catch (Exception err)
             {
                 if (___CheckForInternetConnection())
                 {
-                    Properties.Settings.Default.______odds_iswaiting_01 = true;
-                    Properties.Settings.Default.Save();
-
-                    if (err.ToString().Contains("(50"))
+                    __send++;
+                    if (__send == 5)
                     {
+                        Properties.Settings.Default.______odds_iswaiting_01 = true;
+                        Properties.Settings.Default.Save();
+
                         if (!Properties.Settings.Default.______odds_issend_01)
                         {
                             Properties.Settings.Default.______odds_issend_01 = true;
@@ -777,13 +973,13 @@ namespace Odds_Grabber___wclub888
                         }
 
                         ___FIRST_NOTRUNNINGAsync();
+                        SendMyBot(err.ToString());
                     }
-
-                    SendMyBot(err.ToString());
-
-                    __is_close = false;
-                    Process.Start(Application.ExecutablePath);
-                    Environment.Exit(0);
+                    else
+                    {
+                        await ___TaskWait_Handler(10);
+                        ___FIRST_RUNNINGAsync();
+                    }
                 }
                 else
                 {
@@ -1019,6 +1215,7 @@ namespace Odds_Grabber___wclub888
                             WebClient wc_ = new WebClient();
                             byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
                             string responsebody_ = Encoding.UTF8.GetString(result_);
+                            __send = 0;
                         }
                         catch (Exception err)
                         {
@@ -1030,11 +1227,11 @@ namespace Odds_Grabber___wclub888
                                 {
                                     SendMyBot(err.ToString());
                                     __is_close = false;
-                                    Process.Start(Application.ExecutablePath);
                                     Environment.Exit(0);
                                 }
                                 else
                                 {
+                                    await ___TaskWait_Handler(10);
                                     WebClient wc_ = new WebClient();
                                     byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
                                     string responsebody_ = Encoding.UTF8.GetString(result_);
@@ -1046,53 +1243,9 @@ namespace Odds_Grabber___wclub888
                                 Environment.Exit(0);
                             }
                         }
-
-                        //Task task_send = new Task(delegate {
-                        //    try
-                        //    {
-                        //        WebClient wc_ = new WebClient();
-                        //        byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
-                        //        string responsebody_ = Encoding.UTF8.GetString(result_);
-                        //    }
-                        //    catch (Exception err)
-                        //    {
-
-                        //    }
-                        //});
-                        //task_send.Start();
-
-                        //MessageBox.Show("LeagueName: " + LeagueName.ToString() + "\n" +
-                        //                "HomeScore: " + HomeScore + "\n" +
-                        //                "AwayScore: " + AwayScore + "\n" +
-                        //                "MatchTimeHalf: " + MatchTimeHalf + "\n" +
-                        //                "MatchTimeMinute: " + MatchTimeMinute + "\n" +
-                        //                "HomeTeamName: " + HomeTeamName + "\n" +
-                        //                "AwayTeamName: " + AwayTeamName + "\n" +
-                        //                "MatchID: " + ref_match_id + "\n" +
-                        //                "StatementDate: " + StatementDate + "\n" +
-                        //                "KickOffDateTime: " + KickOffDateTime + "\n" +
-                        //                "FTHDP: " + FTHDP + "\n" +
-                        //                "FTH: " + FTH + "\n" +
-                        //                "FTA: " + FTA + "\n" +
-                        //                "FTOU: " + FTOU + "\n" +
-                        //                "FTO: " + FTO + "\n" +
-                        //                "FTU: " + FTU + "\n" +
-                        //                "FT1: " + FT1 + "\n" +
-                        //                "FTX: " + FTX + "\n" +
-                        //                "FT2: " + FT2 + "\n" +
-                        //                "FHHDP: " + FHHDP + "\n" +
-                        //                "FHH: " + FHH + "\n" +
-                        //                "FHA: " + FHA + "\n" +
-                        //                "FHOU: " + FHOU + "\n" +
-                        //                "FHO: " + FHO + "\n" +
-                        //                "FHU: " + FHU + "\n" +
-                        //                "FH1: " + FH1 + "\n" +
-                        //                "FHX: " + FHX + "\n" +
-                        //                "FH2: " + FH2 + "\n" +
-                        //                "_row_no: " + _row_no + "\n");
                     }
                 }
-                
+
                 if (!Properties.Settings.Default.______odds_iswaiting_01 && Properties.Settings.Default.______odds_issend_01)
                 {
                     Properties.Settings.Default.______odds_issend_01 = false;
@@ -1108,6 +1261,8 @@ namespace Odds_Grabber___wclub888
                 {
                     panel3.BackColor = Color.FromArgb(16, 90, 101);
                 }));
+
+                __send = 0;
                 await ___TaskWait();
                 ___FIRST_RUNNINGAsync();
             }
@@ -1115,11 +1270,12 @@ namespace Odds_Grabber___wclub888
             {
                 if (___CheckForInternetConnection())
                 {
-                    Properties.Settings.Default.______odds_iswaiting_01 = true;
-                    Properties.Settings.Default.Save();
-
-                    if (err.ToString().Contains("(50"))
+                    __send++;
+                    if (__send == 5)
                     {
+                        Properties.Settings.Default.______odds_iswaiting_01 = true;
+                        Properties.Settings.Default.Save();
+
                         if (!Properties.Settings.Default.______odds_issend_01)
                         {
                             Properties.Settings.Default.______odds_issend_01 = true;
@@ -1127,14 +1283,14 @@ namespace Odds_Grabber___wclub888
                             SendABCTeam(__running_11 + " Under Maintenance.");
                         }
 
+                        ___FIRST_RUNNINGAsync();
+                        SendMyBot(err.ToString());
+                    }
+                    else
+                    {
+                        await ___TaskWait_Handler(10);
                         ___FIRST_NOTRUNNINGAsync();
                     }
-
-                    SendMyBot(err.ToString());
-
-                    __is_close = false;
-                    Process.Start(Application.ExecutablePath);
-                    Environment.Exit(0);
                 }
                 else
                 {
@@ -1507,7 +1663,7 @@ namespace Odds_Grabber___wclub888
 
                     }
                 }
-                
+
                 ___SECOND_NOTRUNNINGAsync();
                 __send = 0;
             }
@@ -1550,7 +1706,7 @@ namespace Odds_Grabber___wclub888
             {
                 string start_time = DateTime.Now.AddDays(-2).ToString("yyyy-MM-dd 00:00:00");
                 string end_time = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00");
-                
+
                 var cookieManager = Cef.GetGlobalCookieManager();
                 var visitor = new CookieCollector();
                 cookieManager.VisitUrlCookies(__url, true, visitor);
@@ -1871,7 +2027,7 @@ namespace Odds_Grabber___wclub888
                         }
                     }
                 }
-                
+
                 // send msports 
                 if (!Properties.Settings.Default.______odds_iswaiting_02 && Properties.Settings.Default.______odds_issend_02)
                 {
@@ -1925,176 +2081,6 @@ namespace Odds_Grabber___wclub888
             }
         }
 
-        private void label_player_last_bill_no_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
-        private void panel1_MouseClick(object sender, MouseEventArgs e)
-        {
-            label1.Visible = true;
-        }
-
-        private void panel2_MouseClick(object sender, MouseEventArgs e)
-        {
-            label1.Visible = false;
-        }
-
-        private void timer_flush_memory_Tick(object sender, EventArgs e)
-        {
-            ___FlushMemory();
-        }
-
-        public static void ___FlushMemory()
-        {
-            Process prs = Process.GetCurrentProcess();
-            try
-            {
-                prs.MinWorkingSet = (IntPtr)(300000);
-            }
-            catch (Exception err)
-            {
-                // leave blank
-            }
-        }
-
-        private void timer_detect_running_Tick(object sender, EventArgs e)
-        {
-            //___DetectRunning();
-        }
-
-        private void ___DetectRunning()
-        {
-            try
-            {
-                string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                string password = __brand_code + datetime + "youdieidie";
-                byte[] encodedPassword = new UTF8Encoding().GetBytes(password);
-                byte[] hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(encodedPassword);
-                string token = BitConverter.ToString(hash)
-                   .Replace("-", string.Empty)
-                   .ToLower();
-
-                using (var wb = new WebClient())
-                {
-                    var data = new NameValueCollection
-                    {
-                        ["brand_code"] = __brand_code,
-                        ["app_type"] = __app_type,
-                        ["last_update"] = datetime,
-                        ["token"] = token
-                    };
-
-                    var response = wb.UploadValues("http://zeus.ssitex.com:8080/API/updateAppStatus", "POST", data);
-                    string responseInString = Encoding.UTF8.GetString(response);
-                }
-            }
-            catch (Exception err)
-            {
-                __send++;
-
-                if (___CheckForInternetConnection())
-                {
-                    if (__send == 5)
-                    {
-                        SendMyBot(err.ToString());
-                        __is_close = false;
-                        Process.Start(Application.ExecutablePath);
-                        Environment.Exit(0);
-                    }
-                    else
-                    {
-                        ___DetectRunning();
-                    }
-                }
-                else
-                {
-                    __is_close = false;
-                    Environment.Exit(0);
-                }
-            }
-        }
-
-        private void ___DetectRunning2()
-        {
-            try
-            {
-                string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                string password = __brand_code + datetime + "youdieidie";
-                byte[] encodedPassword = new UTF8Encoding().GetBytes(password);
-                byte[] hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(encodedPassword);
-                string token = BitConverter.ToString(hash)
-                   .Replace("-", string.Empty)
-                   .ToLower();
-
-                using (var wb = new WebClient())
-                {
-                    var data = new NameValueCollection
-                    {
-                        ["brand_code"] = __brand_code,
-                        ["app_type"] = __app_type,
-                        ["last_update"] = datetime,
-                        ["token"] = token
-                    };
-
-                    var response = wb.UploadValues("http://zeus2.ssitex.com:8080/API/updateAppStatus", "POST", data);
-                    string responseInString = Encoding.UTF8.GetString(response);
-                }
-            }
-            catch (Exception err)
-            {
-                __send++;
-
-                if (___CheckForInternetConnection())
-                {
-                    if (__send == 5)
-                    {
-                        SendMyBot(err.ToString());
-                        __is_close = false;
-                        Process.Start(Application.ExecutablePath);
-                        Environment.Exit(0);
-                    }
-                    else
-                    {
-                        ___DetectRunning2();
-                    }
-                }
-                else
-                {
-                    __is_close = false;
-                    Environment.Exit(0);
-                }
-            }
-        }
-
-        private void panel1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (__is_send)
-            {
-                __is_send = false;
-                MessageBox.Show("Telegram Notification is Disabled.", __brand_code + " " + __app, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                __is_send = true;
-                MessageBox.Show("Telegram Notification is Enabled.", __brand_code + " " + __app, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void ___WaitNSeconds(int sec)
-        {
-            if (sec < 1) return;
-            DateTime _desired = DateTime.Now.AddSeconds(sec);
-            while (DateTime.Now < _desired)
-            {
-                Application.DoEvents();
-            }
-        }
-
         public static bool ___CheckForInternetConnection()
         {
             try
@@ -2111,108 +2097,6 @@ namespace Odds_Grabber___wclub888
             }
         }
 
-        private void timer_size_Tick(object sender, EventArgs e)
-        {
-            __mainFormHandler = Application.OpenForms[0];
-            __mainFormHandler.Size = new Size(466, 168);
-        }
-
-        private void SendMyBot(string message)
-        {
-            try
-            {
-                string datetime = DateTime.Now.ToString("dd MMM HH:mm:ss");
-                string urlString = "https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}";
-                string apiToken = "772918363:AAHn2ufmP3ocLEilQ1V-IHcqYMcSuFJHx5g";
-                string chatId = "@allandrake";
-                string text = "-----" + __app__website_name + "-----%0A%0AIP:%20ABC PC%0ALocation:%20Pacific%20Star%0ADate%20and%20Time:%20[" + datetime + "]%0AMessage:%20" + message;
-                urlString = String.Format(urlString, apiToken, chatId, text);
-                WebRequest request = WebRequest.Create(urlString);
-                Stream rs = request.GetResponse().GetResponseStream();
-                StreamReader reader = new StreamReader(rs);
-                string line = "";
-                StringBuilder sb = new StringBuilder();
-                while (line != null)
-                {
-                    line = reader.ReadLine();
-                    if (line != null)
-                        sb.Append(line);
-                }
-            }
-            catch (Exception err)
-            {
-                __send++;
-
-                if (___CheckForInternetConnection())
-                {
-                    if (__send == 5)
-                    {
-                        SendMyBot(err.ToString());
-                        __is_close = false;
-                        Process.Start(Application.ExecutablePath);
-                        Environment.Exit(0);
-                    }
-                    else
-                    {
-                        SendMyBot(message);
-                    }
-                }
-                else
-                {
-                    __is_close = false;
-                    Environment.Exit(0);
-                }
-            }
-        }
-
-        private void SendABCTeam(string message)
-        {
-            try
-            {
-                string datetime = DateTime.Now.ToString("dd MMM HH:mm:ss");
-                string urlString = "https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}";
-                string apiToken = "651945130:AAGMFj-C4wX0yElG2dBU1SRbfrNZi75jPHg";
-                string chatId = "@odds_bot_abc_team";
-                string text = "Bot:%20-----" + __website_name.ToUpper() + "-----%0ADate%20and%20Time:%20[" + datetime + "]%0AMessage:%20<b>" + message + "</>&parse_mode=html";
-                urlString = String.Format(urlString, apiToken, chatId, text);
-                WebRequest request = WebRequest.Create(urlString);
-                Stream rs = request.GetResponse().GetResponseStream();
-                StreamReader reader = new StreamReader(rs);
-                string line = "";
-                StringBuilder sb = new StringBuilder();
-                while (line != null)
-                {
-                    line = reader.ReadLine();
-                    if (line != null)
-                        sb.Append(line);
-                }
-            }
-            catch (Exception err)
-            {
-                __send++;
-
-                if (___CheckForInternetConnection())
-                {
-                    if (__send == 5)
-                    {
-                        SendMyBot(err.ToString());
-                        __is_close = false;
-                        Process.Start(Application.ExecutablePath);
-                        Environment.Exit(0);
-                    }
-                    else
-                    {
-                        SendABCTeam(message);
-                    }
-                }
-                else
-                {
-                    __is_close = false;
-                    Environment.Exit(0);
-                }
-            }
-        }
-
         async Task ___TaskWait()
         {
             Random _random = new Random();
@@ -2221,14 +2105,18 @@ namespace Odds_Grabber___wclub888
             await Task.Delay(Convert.ToInt32(_randowm_number_replace));
         }
 
+        async Task ___TaskWait_Handler(int sec)
+        {
+            sec++;
+            Random _random = new Random();
+            int _random_number = _random.Next(sec, sec);
+            string _randowm_number_replace = _random_number.ToString() + "000";
+            await Task.Delay(Convert.ToInt32(_randowm_number_replace));
+        }
+
         public bool __is_numeric(string value)
         {
             return value.All(char.IsNumber);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ___SECOND_NOTRUNNINGAsync();
         }
     }
 }
