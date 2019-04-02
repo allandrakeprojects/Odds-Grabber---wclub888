@@ -41,10 +41,10 @@ namespace Odds_Grabber___wclub888
         private bool __is_close;
         private bool __is_login = false;
         private bool __is_send = false;
+        private bool __m_aeroEnabled;
         Form __mainFormHandler;
 
         // Drag Header to Move
-        private bool m_aeroEnabled;
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImport("user32.dll")]
@@ -89,10 +89,10 @@ namespace Odds_Grabber___wclub888
         {
             get
             {
-                m_aeroEnabled = CheckAeroEnabled();
+                __m_aeroEnabled = CheckAeroEnabled();
 
                 CreateParams cp = base.CreateParams;
-                if (!m_aeroEnabled)
+                if (!__m_aeroEnabled)
                     cp.ClassStyle |= CS_DROPSHADOW;
 
                 cp.Style |= WS_MINIMIZEBOX;
@@ -115,7 +115,7 @@ namespace Odds_Grabber___wclub888
             switch (m.Msg)
             {
                 case WM_NCPAINT:
-                    if (m_aeroEnabled)
+                    if (__m_aeroEnabled)
                     {
                         var v = 2;
                         DwmSetWindowAttribute(Handle, 2, ref v, 4);
@@ -225,7 +225,7 @@ namespace Odds_Grabber___wclub888
         // Click Close
         private void pictureBox_close_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Exit the program?", "YB FD Grab", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dr = MessageBox.Show("Exit the program?", __app__website_name, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
                 __is_close = true;
@@ -275,7 +275,7 @@ namespace Odds_Grabber___wclub888
         {
             if (!__is_close)
             {
-                DialogResult dr = MessageBox.Show("Exit the program?", "YB FD Grab", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("Exit the program?", __app__website_name, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -285,8 +285,10 @@ namespace Odds_Grabber___wclub888
                     Environment.Exit(0);
                 }
             }
-
-            Environment.Exit(0);
+            else
+            {
+                Environment.Exit(0);
+            }
         }
 
         // Form Load
@@ -394,6 +396,7 @@ namespace Odds_Grabber___wclub888
                     if (line != null)
                         sb.Append(line);
                 }
+                __send = 0;
             }
             catch (Exception err)
             {
@@ -403,9 +406,8 @@ namespace Odds_Grabber___wclub888
                 {
                     if (__send == 5)
                     {
-                        SendMyBot(err.ToString());
+                        __Flag();
                         __is_close = false;
-                        Process.Start(Application.ExecutablePath);
                         Environment.Exit(0);
                     }
                     else
@@ -442,6 +444,7 @@ namespace Odds_Grabber___wclub888
                     if (line != null)
                         sb.Append(line);
                 }
+                __send = 0;
             }
             catch (Exception err)
             {
@@ -451,9 +454,8 @@ namespace Odds_Grabber___wclub888
                 {
                     if (__send == 5)
                     {
-                        SendMyBot(err.ToString());
+                        __Flag();
                         __is_close = false;
-                        Process.Start(Application.ExecutablePath);
                         Environment.Exit(0);
                     }
                     else
@@ -471,7 +473,7 @@ namespace Odds_Grabber___wclub888
 
         private void timer_detect_running_Tick(object sender, EventArgs e)
         {
-            ___DetectRunningAsync();
+            //___DetectRunningAsync();
         }
 
         private async void ___DetectRunningAsync()
@@ -499,6 +501,7 @@ namespace Odds_Grabber___wclub888
                     var response = wb.UploadValues("http://192.168.10.252:8080/API/updateAppStatus", "POST", data);
                     string responseInString = Encoding.UTF8.GetString(response);
                 }
+                __send = 0;
             }
             catch (Exception err)
             {
@@ -551,6 +554,7 @@ namespace Odds_Grabber___wclub888
                     var response = wb.UploadValues("http://zeus.ssitex.com:8080/API/updateAppStatus", "POST", data);
                     string responseInString = Encoding.UTF8.GetString(response);
                 }
+                __send = 0;
             }
             catch (Exception err)
             {
@@ -1358,7 +1362,6 @@ namespace Odds_Grabber___wclub888
                     byte[] hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(encodedPassword);
                     string token = BitConverter.ToString(hash).Replace("-", string.Empty).ToLower();
                     string ref_match_id = "";
-
                     string _last_ref_id = "";
 
                     for (int i = 0; i < _jo_match_count.Count(); i++)
@@ -1424,10 +1427,10 @@ namespace Odds_Grabber___wclub888
                         bool FTOU_bool = false;
                         bool FHHDP_bool = false;
                         bool FHOU_bool = false;
-                        bool is_all = true;
+                        bool _is_all = true;
                         int count = 0;
 
-                        while (is_all)
+                        while (_is_all)
                         {
                             // 1x2 -----
                             JToken FT1 = "";
@@ -1474,11 +1477,11 @@ namespace Odds_Grabber___wclub888
                                 FTH = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][1]").ToString();
                                 FTA = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][2]").ToString();
                                 FTHDP = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][3]").ToString();
-                                is_all = true;
+                                _is_all = true;
                             }
                             catch (Exception err)
                             {
-                                is_all = false;
+                                _is_all = false;
                             }
 
                             // FTOU ----
@@ -1490,11 +1493,11 @@ namespace Odds_Grabber___wclub888
                                 FTO = _jo.SelectToken("$.Data.MH[" + i + "].MK.3[" + count + "][1]").ToString();
                                 FTU = _jo.SelectToken("$.Data.MH[" + i + "].MK.3[" + count + "][2]").ToString();
                                 FTOU = _jo.SelectToken("$.Data.MH[" + i + "].MK.3[" + count + "][3]").ToString();
-                                is_all = true;
+                                _is_all = true;
                             }
                             catch (Exception err)
                             {
-                                is_all = false;
+                                _is_all = false;
                             }
 
                             // FHOU ----
@@ -1506,11 +1509,11 @@ namespace Odds_Grabber___wclub888
                                 FHO = _jo.SelectToken("$.Data.MH[" + i + "].MK.4[" + count + "][1]").ToString();
                                 FHU = _jo.SelectToken("$.Data.MH[" + i + "].MK.4[" + count + "][2]").ToString();
                                 FHOU = _jo.SelectToken("$.Data.MH[" + i + "].MK.4[" + count + "][3]").ToString();
-                                is_all = true;
+                                _is_all = true;
                             }
                             catch (Exception err)
                             {
-                                is_all = false;
+                                _is_all = false;
                             }
 
                             // FHHDP -----
@@ -1522,47 +1525,17 @@ namespace Odds_Grabber___wclub888
                                 FHH = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][1]").ToString();
                                 FHA = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][2]").ToString();
                                 FHHDP = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][3]").ToString();
-                                is_all = true;
+                                _is_all = true;
                             }
                             catch (Exception err)
                             {
-                                is_all = false;
+                                _is_all = false;
                             }
 
-                            if (is_all)
+                            if (_is_all)
                             {
 
                             }
-
-                            //MessageBox.Show("MatchID: " + MatchID.ToString() + "\n" +
-                            //                "RowNo: " + _row_no.ToString() + "\n" +
-                            //                "LeagueName: " + LeagueName.ToString() + "\n" +
-                            //                "HomeTeamName: " + HomeTeamName.ToString() + "\n" +
-                            //                "AwayTeamName: " + AwayTeamName.ToString() + "\n" +
-                            //                "HomeScore: " + HomeScore.ToString() + "\n" +
-                            //                "AwayScore: " + AwayScore.ToString() + "\n" +
-                            //                "MatchTimeHalf: " + MatchTimeHalf.ToString() + "\n" +
-                            //                "MatchTimeMinute: " + MatchTimeMinute.ToString() + "\n" +
-                            //                "FT ---" + "\n" +
-                            //                "FTH: " + FTH.ToString() + "\n" +
-                            //                "FTA: " + FTA.ToString() + "\n" +
-                            //                "FTHDP: " + FTHDP.ToString() + "\n" +
-                            //                "FTO: " + FTO.ToString() + "\n" +
-                            //                "FTU: " + FTU.ToString() + "\n" +
-                            //                "FTOU: " + FTOU.ToString() + "\n" +
-                            //                "FT1: " + FT1.ToString() + "\n" +
-                            //                "FTX: " + FTX.ToString() + "\n" +
-                            //                "FT2: " + FT2.ToString() + "\n" +
-                            //                "FH ---" + "\n" +
-                            //                "FHH: " + FHH.ToString() + "\n" +
-                            //                "FHA: " + FHA.ToString() + "\n" +
-                            //                "FHHDP: " + FHHDP.ToString() + "\n" +
-                            //                "FHO: " + FHO.ToString() + "\n" +
-                            //                "FHU: " + FHU.ToString() + "\n" +
-                            //                "FHOU: " + FHOU.ToString() + "\n" +
-                            //                "FH1: " + FH1.ToString() + "\n" +
-                            //                "FHX: " + FHX.ToString() + "\n" +
-                            //                "FH2: " + FH2.ToString());
 
                             var reqparm_ = new NameValueCollection
                             {
@@ -1615,6 +1588,7 @@ namespace Odds_Grabber___wclub888
                                 WebClient wc_ = new WebClient();
                                 byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
                                 string responsebody_ = Encoding.UTF8.GetString(result_);
+                                __send = 0;
                             }
                             catch (Exception err)
                             {
@@ -1626,11 +1600,11 @@ namespace Odds_Grabber___wclub888
                                     {
                                         SendMyBot(err.ToString());
                                         __is_close = false;
-                                        Process.Start(Application.ExecutablePath);
                                         Environment.Exit(0);
                                     }
                                     else
                                     {
+                                        await ___TaskWait_Handler(10);
                                         WebClient wc_ = new WebClient();
                                         byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
                                         string responsebody_ = Encoding.UTF8.GetString(result_);
@@ -1643,20 +1617,6 @@ namespace Odds_Grabber___wclub888
                                 }
                             }
 
-                            //Task task_send = new Task(delegate {
-                            //    try
-                            //    {
-                            //        WebClient wc_ = new WebClient();
-                            //        byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
-                            //        string responsebody_ = Encoding.UTF8.GetString(result_);
-                            //    }
-                            //    catch (Exception err)
-                            //    {
-
-                            //    }
-                            //});
-                            //task_send.Start();
-
                             _row_no++;
                             count++;
                         }
@@ -1664,18 +1624,19 @@ namespace Odds_Grabber___wclub888
                     }
                 }
 
-                ___SECOND_NOTRUNNINGAsync();
                 __send = 0;
+                ___SECOND_NOTRUNNINGAsync();
             }
             catch (Exception err)
             {
                 if (___CheckForInternetConnection())
                 {
-                    Properties.Settings.Default.______odds_iswaiting_02 = true;
-                    Properties.Settings.Default.Save();
-
-                    if (err.ToString().Contains("(50"))
+                    __send++;
+                    if (__send == 5)
                     {
+                        Properties.Settings.Default.______odds_iswaiting_02 = true;
+                        Properties.Settings.Default.Save();
+
                         if (!Properties.Settings.Default.______odds_issend_02)
                         {
                             Properties.Settings.Default.______odds_issend_02 = true;
@@ -1683,14 +1644,14 @@ namespace Odds_Grabber___wclub888
                             SendABCTeam(__running_22 + " Under Maintenance.");
                         }
 
+                        ___SECOND_NOTRUNNINGAsync();
+                        SendMyBot(err.ToString());
+                    }
+                    else
+                    {
+                        await ___TaskWait_Handler(10);
                         ___SECOND_RUNNINGAsync();
                     }
-
-                    SendMyBot(err.ToString());
-
-                    __is_close = false;
-                    Process.Start(Application.ExecutablePath);
-                    Environment.Exit(0);
                 }
                 else
                 {
@@ -1791,15 +1752,11 @@ namespace Odds_Grabber___wclub888
                             HomeTeamName = replace[0].Trim();
                             AwayTeamName = replace[1].Trim();
                         }
-
-                        bool FTHDP_bool = false;
-                        bool FTOU_bool = false;
-                        bool FHHDP_bool = false;
-                        bool FHOU_bool = false;
-                        bool is_all = true;
+                        
+                        bool _is_all = true;
                         int count = 0;
 
-                        while (is_all)
+                        while (_is_all)
                         {
                             // 1x2 -----
                             JToken FT1 = "";
@@ -1846,11 +1803,11 @@ namespace Odds_Grabber___wclub888
                                 FTH = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][1]").ToString();
                                 FTA = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][2]").ToString();
                                 FTHDP = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][3]").ToString();
-                                is_all = true;
+                                _is_all = true;
                             }
                             catch (Exception err)
                             {
-                                is_all = false;
+                                _is_all = false;
                             }
 
                             // FTOU ----
@@ -1862,11 +1819,11 @@ namespace Odds_Grabber___wclub888
                                 FTO = _jo.SelectToken("$.Data.MH[" + i + "].MK.3[" + count + "][1]").ToString();
                                 FTU = _jo.SelectToken("$.Data.MH[" + i + "].MK.3[" + count + "][2]").ToString();
                                 FTOU = _jo.SelectToken("$.Data.MH[" + i + "].MK.3[" + count + "][3]").ToString();
-                                is_all = true;
+                                _is_all = true;
                             }
                             catch (Exception err)
                             {
-                                is_all = false;
+                                _is_all = false;
                             }
 
                             // FHOU ----
@@ -1878,11 +1835,11 @@ namespace Odds_Grabber___wclub888
                                 FHO = _jo.SelectToken("$.Data.MH[" + i + "].MK.4[" + count + "][1]").ToString();
                                 FHU = _jo.SelectToken("$.Data.MH[" + i + "].MK.4[" + count + "][2]").ToString();
                                 FHOU = _jo.SelectToken("$.Data.MH[" + i + "].MK.4[" + count + "][3]").ToString();
-                                is_all = true;
+                                _is_all = true;
                             }
                             catch (Exception err)
                             {
-                                is_all = false;
+                                _is_all = false;
                             }
 
                             // FHHDP -----
@@ -1894,40 +1851,15 @@ namespace Odds_Grabber___wclub888
                                 FHH = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][1]").ToString();
                                 FHA = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][2]").ToString();
                                 FHHDP = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][3]").ToString();
-                                is_all = true;
+                                _is_all = true;
                             }
                             catch (Exception err)
                             {
-                                is_all = false;
+                                _is_all = false;
                             }
 
-                            if (is_all)
+                            if (_is_all)
                             {
-                                //MessageBox.Show("MatchID: " + MatchID.ToString() + "\n" +
-                                //                "LeagueName: " + LeagueName.ToString() + "\n" +
-                                //                "HomeTeamName: " + HomeTeamName.ToString() + "\n" +
-                                //                "AwayTeamName: " + AwayTeamName.ToString() + "\n" +
-                                //                "FT ---" + "\n" +
-                                //                "FTH: " + FTH.ToString() + "\n" +
-                                //                "FTA: " + FTA.ToString() + "\n" +
-                                //                "FTHDP: " + FTHDP.ToString() + "\n" +
-                                //                "FTO: " + FTO.ToString() + "\n" +
-                                //                "FTU: " + FTU.ToString() + "\n" +
-                                //                "FTOU: " + FTOU.ToString() + "\n" +
-                                //                "FT1: " + FT1.ToString() + "\n" +
-                                //                "FTX: " + FTX.ToString() + "\n" +
-                                //                "FT2: " + FT2.ToString() + "\n" +
-                                //                "FH ---" + "\n" +
-                                //                "FHH: " + FHH.ToString() + "\n" +
-                                //                "FHA: " + FHA.ToString() + "\n" +
-                                //                "FHHDP: " + FHHDP.ToString() + "\n" +
-                                //                "FHO: " + FHO.ToString() + "\n" +
-                                //                "FHU: " + FHU.ToString() + "\n" +
-                                //                "FHOU: " + FHOU.ToString() + "\n" +
-                                //                "FH1: " + FH1.ToString() + "\n" +
-                                //                "FHX: " + FHX.ToString() + "\n" +
-                                //                "FH2: " + FH2.ToString());
-
                                 var reqparm_ = new NameValueCollection
                                 {
                                     {"source_id", "4"},
@@ -1979,6 +1911,7 @@ namespace Odds_Grabber___wclub888
                                     WebClient wc_ = new WebClient();
                                     byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
                                     string responsebody_ = Encoding.UTF8.GetString(result_);
+                                    __send = 0;
                                 }
                                 catch (Exception err)
                                 {
@@ -1990,11 +1923,11 @@ namespace Odds_Grabber___wclub888
                                         {
                                             SendMyBot(err.ToString());
                                             __is_close = false;
-                                            Process.Start(Application.ExecutablePath);
                                             Environment.Exit(0);
                                         }
                                         else
                                         {
+                                            await ___TaskWait_Handler(10);
                                             WebClient wc_ = new WebClient();
                                             byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
                                             string responsebody_ = Encoding.UTF8.GetString(result_);
@@ -2006,20 +1939,6 @@ namespace Odds_Grabber___wclub888
                                         Environment.Exit(0);
                                     }
                                 }
-
-                                //Task task_send = new Task(delegate {
-                                //    try
-                                //    {
-                                //        WebClient wc_ = new WebClient();
-                                //        byte[] result_ = wc_.UploadValues("http://oddsgrabber.ssitex.com/API/sendOdds", "POST", reqparm_);
-                                //        string responsebody_ = Encoding.UTF8.GetString(result_);
-                                //    }
-                                //    catch (Exception err)
-                                //    {
-
-                                //    }
-                                //});
-                                //task_send.Start();
                             }
 
                             _row_no++;
@@ -2044,19 +1963,21 @@ namespace Odds_Grabber___wclub888
                 {
                     panel4.BackColor = Color.FromArgb(16, 90, 101);
                 }));
+
+                __send = 0;
                 await ___TaskWait();
                 ___SECOND_RUNNINGAsync();
-                __send = 0;
             }
             catch (Exception err)
             {
                 if (___CheckForInternetConnection())
                 {
-                    Properties.Settings.Default.______odds_iswaiting_02 = true;
-                    Properties.Settings.Default.Save();
-
-                    if (err.ToString().Contains("(50"))
+                    __send++;
+                    if (__send == 5)
                     {
+                        Properties.Settings.Default.______odds_iswaiting_02 = true;
+                        Properties.Settings.Default.Save();
+
                         if (!Properties.Settings.Default.______odds_issend_02)
                         {
                             Properties.Settings.Default.______odds_issend_02 = true;
@@ -2065,13 +1986,13 @@ namespace Odds_Grabber___wclub888
                         }
 
                         ___SECOND_RUNNINGAsync();
+                        SendMyBot(err.ToString());
                     }
-
-                    SendMyBot(err.ToString());
-
-                    __is_close = false;
-                    Process.Start(Application.ExecutablePath);
-                    Environment.Exit(0);
+                    else
+                    {
+                        await ___TaskWait_Handler(10);
+                        ___SECOND_NOTRUNNINGAsync();
+                    }
                 }
                 else
                 {
@@ -2097,7 +2018,7 @@ namespace Odds_Grabber___wclub888
             }
         }
 
-        async Task ___TaskWait()
+        private async Task ___TaskWait()
         {
             Random _random = new Random();
             int _random_number = _random.Next(10, 16);
@@ -2105,7 +2026,7 @@ namespace Odds_Grabber___wclub888
             await Task.Delay(Convert.ToInt32(_randowm_number_replace));
         }
 
-        async Task ___TaskWait_Handler(int sec)
+        private async Task ___TaskWait_Handler(int sec)
         {
             sec++;
             Random _random = new Random();
@@ -2117,6 +2038,15 @@ namespace Odds_Grabber___wclub888
         public bool __is_numeric(string value)
         {
             return value.All(char.IsNumber);
+        }
+
+        private void __Flag()
+        {
+            string _flag = Path.Combine(Path.GetTempPath(), __website_name + ".txt");
+            using (StreamWriter sw = new StreamWriter(_flag, true))
+            {
+                sw.WriteLine("<<>>" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "<<>>");
+            }
         }
     }
 }
