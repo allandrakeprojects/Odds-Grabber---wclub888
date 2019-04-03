@@ -304,16 +304,6 @@ namespace Odds_Grabber___wclub888
             InitializeChromium();
         }
 
-        private void panel1_MouseClick(object sender, MouseEventArgs e)
-        {
-            label1.Visible = true;
-        }
-
-        private void panel2_MouseClick(object sender, MouseEventArgs e)
-        {
-            label1.Visible = false;
-        }
-
         private void panel3_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
