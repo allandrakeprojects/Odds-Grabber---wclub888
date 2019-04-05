@@ -963,7 +963,7 @@ namespace Odds_Grabber___wclub888
                         {
                             Properties.Settings.Default.______odds_issend_01 = true;
                             Properties.Settings.Default.Save();
-                            SendABCTeam(__running_11 + " Under Maintenance.");
+                            SendMyBot(__running_11 + " Under Maintenance.");
                         }
 
                         ___FIRST_NOTRUNNINGAsync();
@@ -1245,7 +1245,7 @@ namespace Odds_Grabber___wclub888
                     Properties.Settings.Default.______odds_issend_01 = false;
                     Properties.Settings.Default.Save();
 
-                    SendABCTeam(__running_11 + " Back to Normal.");
+                    SendMyBot(__running_11 + " Back to Normal.");
                 }
 
                 Properties.Settings.Default.______odds_iswaiting_01 = false;
@@ -1274,7 +1274,7 @@ namespace Odds_Grabber___wclub888
                         {
                             Properties.Settings.Default.______odds_issend_01 = true;
                             Properties.Settings.Default.Save();
-                            SendABCTeam(__running_11 + " Under Maintenance.");
+                            SendMyBot(__running_11 + " Under Maintenance.");
                         }
 
                         ___FIRST_RUNNINGAsync();
@@ -1631,7 +1631,7 @@ namespace Odds_Grabber___wclub888
                         {
                             Properties.Settings.Default.______odds_issend_02 = true;
                             Properties.Settings.Default.Save();
-                            SendABCTeam(__running_22 + " Under Maintenance.");
+                            SendMyBot(__running_22 + " Under Maintenance.");
                         }
 
                         ___SECOND_NOTRUNNINGAsync();
@@ -1943,7 +1943,7 @@ namespace Odds_Grabber___wclub888
                     Properties.Settings.Default.______odds_issend_02 = false;
                     Properties.Settings.Default.Save();
 
-                    SendABCTeam(__running_22 + " Back to Normal.");
+                    SendMyBot(__running_22 + " Back to Normal.");
                 }
 
                 Properties.Settings.Default.______odds_iswaiting_02 = false;
@@ -1972,7 +1972,7 @@ namespace Odds_Grabber___wclub888
                         {
                             Properties.Settings.Default.______odds_issend_02 = true;
                             Properties.Settings.Default.Save();
-                            SendABCTeam(__running_22 + " Under Maintenance.");
+                            SendMyBot(__running_22 + " Under Maintenance.");
                         }
 
                         ___SECOND_RUNNINGAsync();
