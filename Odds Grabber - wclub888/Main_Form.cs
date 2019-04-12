@@ -249,7 +249,7 @@ namespace Odds_Grabber___wclub888
 
         void ___CloseMessageBox()
         {
-            IntPtr windowPtr = FindWindowByCaption(IntPtr.Zero, "JavaScript Alert - http://wclub888.com");
+            IntPtr windowPtr = FindWindowByCaption(IntPtr.Zero, "JavaScript Alert - http://sports.wclub888.com");
 
             if (windowPtr == IntPtr.Zero)
             {
