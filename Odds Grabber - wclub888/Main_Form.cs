@@ -763,6 +763,23 @@ namespace Odds_Grabber___wclub888
                         DateTime KickOffDateTime_Replace = DateTime.ParseExact(KickOffDateTime.ToString(), "dd/MM HH:mm", CultureInfo.InvariantCulture);
                         KickOffDateTime = KickOffDateTime_Replace.ToString("yyyy-MM-dd HH:mm:ss");
                         JToken FTHDP = _jo.SelectToken("$.JSOdds[" + i + "][24]").ToString();
+                        if (FTHDP.ToString() == "-1")
+                        {
+                            FTHDP = "0";
+                        }
+                        JToken FTHDP_Detect = _jo.SelectToken("$.JSOdds[" + i + "][25]").ToString();
+                        String FTHDPH = "";
+                        String FTHDPA = "";
+                        if (FTHDP_Detect.ToString().ToLower() == "true")
+                        {
+                            FTHDPH = "-" + FTHDP;
+                            FTHDPA = "+" + FTHDP;
+                        }
+                        else
+                        {
+                            FTHDPA = "-" + FTHDP;
+                            FTHDPH = "+" + FTHDP;
+                        }
                         JToken FTH = _jo.SelectToken("$.JSOdds[" + i + "][36]").ToString().Trim().Replace(".", "");
                         string FTH_Replace = FTH.ToString().Replace("-", "");
                         if (FTH_Replace.Length == 1 && FTH_Replace != "0")
@@ -770,6 +787,7 @@ namespace Odds_Grabber___wclub888
                             FTH = FTH + "0";
                         }
                         FTH = Convert.ToDecimal(FTH) / 100;
+                        FTH = ___ConvertToEU(FTH.ToString());
                         JToken FTA = _jo.SelectToken("$.JSOdds[" + i + "][37]").ToString().Trim().Replace(".", "");
                         string FTA_Replace = FTA.ToString().Replace("-", "");
                         if (FTA_Replace.Length == 1 && FTA_Replace != "0")
@@ -777,6 +795,7 @@ namespace Odds_Grabber___wclub888
                             FTA = FTA + "0";
                         }
                         FTA = Convert.ToDecimal(FTA) / 100;
+                        FTA = ___ConvertToEU(FTA.ToString());
                         string BetIDFTOU = "";
                         JToken FTOU = _jo.SelectToken("$.JSOdds[" + i + "][42]").ToString();
                         JToken FTO = _jo.SelectToken("$.JSOdds[" + i + "][46]").ToString().Trim().Replace(".", "");
@@ -785,6 +804,8 @@ namespace Odds_Grabber___wclub888
                         {
                             FTO = FTO + "0";
                         }
+                        FTO = Convert.ToDecimal(FTO) / 100;
+                        FTO = ___ConvertToEU(FTO.ToString());
                         JToken FTU = _jo.SelectToken("$.JSOdds[" + i + "][47]").ToString().Trim().Replace(".", "");
                         string FTU_Replace = FTU.ToString().Replace("-", "");
                         if (FTU_Replace.Length == 1 && FTU_Replace != "0")
@@ -792,6 +813,7 @@ namespace Odds_Grabber___wclub888
                             FTU = FTU + "0";
                         }
                         FTU = Convert.ToDecimal(FTU) / 100;
+                        FTU = ___ConvertToEU(FTU.ToString());
                         JToken FT1 = _jo.SelectToken("$.JSOdds[" + i + "][51]").ToString();
                         JToken FT2 = _jo.SelectToken("$.JSOdds[" + i + "][52]").ToString();
                         JToken FTX = _jo.SelectToken("$.JSOdds[" + i + "][53]").ToString();
@@ -801,6 +823,23 @@ namespace Odds_Grabber___wclub888
                         string BetIDFT1X2 = "";
                         string SpecialGame = "";
                         JToken FHHDP = _jo.SelectToken("$.JSOdds[" + i + "][56]").ToString();
+                        if (FHHDP.ToString() == "-1")
+                        {
+                            FHHDP = "0";
+                        }
+                        JToken FHHDP_Detect = _jo.SelectToken("$.JSOdds[" + i + "][57]").ToString();
+                        String FHHDPH = "";
+                        String FHHDPA = "";
+                        if (FHHDP_Detect.ToString().ToLower() == "true")
+                        {
+                            FHHDPH = "-" + FHHDP;
+                            FHHDPA = "+" + FHHDP;
+                        }
+                        else
+                        {
+                            FHHDPA = "-" + FHHDP;
+                            FHHDPH = "+" + FHHDP;
+                        }
                         JToken FHH = _jo.SelectToken("$.JSOdds[" + i + "][60]").ToString().Trim().Replace(".", "");
                         string FHH_Replace = FHH.ToString().Replace("-", "");
                         if (FHH_Replace.Length == 1 && FHH_Replace != "0")
@@ -808,6 +847,7 @@ namespace Odds_Grabber___wclub888
                             FHH = FHH + "0";
                         }
                         FHH = Convert.ToDecimal(FHH) / 100;
+                        FHH = ___ConvertToEU(FHH.ToString());
                         JToken FHA = _jo.SelectToken("$.JSOdds[" + i + "][61]").ToString().Trim().Replace(".", "");
                         string FHA_Replace = FHA.ToString().Replace("-", "");
                         if (FHA_Replace.Length == 1 && FHA_Replace != "0")
@@ -815,6 +855,7 @@ namespace Odds_Grabber___wclub888
                             FHA = FHA + "0";
                         }
                         FHA = Convert.ToDecimal(FHA) / 100;
+                        FHA = ___ConvertToEU(FHA.ToString());
                         JToken FHOU = _jo.SelectToken("$.JSOdds[" + i + "][64]").ToString();
                         JToken FHO = _jo.SelectToken("$.JSOdds[" + i + "][67]").ToString().Trim().Replace(".", "");
                         string FHO_Replace = FHO.ToString().Replace("-", "");
@@ -823,13 +864,15 @@ namespace Odds_Grabber___wclub888
                             FHO = FHO + "0";
                         }
                         FHO = Convert.ToDecimal(FHO) / 100;
-                        JToken FHU = _jo.SelectToken("$.JSOdds[" + i + "][67]").ToString().Trim().Replace(".", "");
+                        FHO = ___ConvertToEU(FHO.ToString());
+                        JToken FHU = _jo.SelectToken("$.JSOdds[" + i + "][68]").ToString().Trim().Replace(".", "");
                         string FHU_Replace = FHU.ToString().Replace("-", "");
                         if (FHU_Replace.Length == 1 && FHU_Replace != "0")
                         {
                             FHU = FHU + "0";
                         }
                         FHU = Convert.ToDecimal(FHU) / 100;
+                        FHU = ___ConvertToEU(FHU.ToString());
                         JToken FH1 = _jo.SelectToken("$.JSOdds[" + i + "][72]").ToString();
                         JToken FH2 = _jo.SelectToken("$.JSOdds[" + i + "][73]").ToString();
                         JToken FHX = _jo.SelectToken("$.JSOdds[" + i + "][74]").ToString();
@@ -851,18 +894,55 @@ namespace Odds_Grabber___wclub888
 
                         _last_ref_id = ref_match_id;
 
-                        if (HomeTeamName.ToString().ToLower().Contains("vs") || AwayTeamName.ToString().ToLower().Contains("vs"))
+                        if (HomeTeamName.ToString().ToLower().Contains(" vs ") || AwayTeamName.ToString().ToLower().Contains(" vs "))
                         {
                             string[] replace = HomeTeamName.ToString().Split(new string[] { "vs" }, StringSplitOptions.None);
                             HomeTeamName = replace[0].Trim();
                             AwayTeamName = replace[1].Trim();
                         }
-                        else if (HomeTeamName.ToString().ToLower().Contains("+") || AwayTeamName.ToString().ToLower().Contains("+"))
-                        {
-                            string[] replace = HomeTeamName.ToString().Split('+');
-                            HomeTeamName = replace[0].Trim();
-                            AwayTeamName = replace[1].Trim();
-                        }
+
+                        //MessageBox.Show(
+                        //                "LeagueName: " + LeagueName + "\n" +
+                        //                "MatchID: " + ref_match_id + "\n" +
+                        //                "_row_no: " + _row_no + "\n" +
+                        //                "HomeTeamName: " + HomeTeamName + "\n" +
+                        //                "HomeTeamName: " + AwayTeamName + "\n" +
+                        //                "HomeScore: " + HomeScore + "\n" +
+                        //                "AwayScore: " + AwayScore + "\n" +
+                        //                "MatchTimeHalf: " + MatchTimeHalf + "\n" +
+                        //                "MatchTimeMinute: " + MatchTimeMinute + "\n" +
+                        //                "KickOffDateTime: " + KickOffDateTime + "\n" +
+                        //                "StatementDate: " + StatementDate + "\n" +
+                        //                "\n-FTHDP-\n" +
+                        //                "FTHDPH: " + FTHDPH + "\n" +
+                        //                "FTHDPA: " + FTHDPA + "\n" +
+                        //                "FTH: " + FTH + "\n" +
+                        //                "FTA: " + FTA + "\n" +
+                        //                "\nFTOU\n" +
+                        //                "FTOU: " + FTOU + "\n" +
+                        //                "FTO: " + FTO + "\n" +
+                        //                "FTU: " + FTU + "\n" +
+                        //                "\n1x2\n" +
+                        //                "FT1: " + FT1 + "\n" +
+                        //                "FT2: " + FT2 + "\n" +
+                        //                "FTX: " + FTX + "\n" +
+                        //                "\nOdd\n" +
+                        //                "FTOdd: " + FTOdd + "\n" +
+                        //                "FTEven: " + FTEven + "\n" +
+                        //                "\n-FHHDP-\n" +
+                        //                "FHHDPH: " + FHHDPH + "\n" +
+                        //                "FHHDPA: " + FHHDPA + "\n" +
+                        //                "FHH: " + FHH + "\n" +
+                        //                "FHA: " + FHA + "\n" +
+                        //                "\nFHOU\n" +
+                        //                "FHOU: " + FHOU + "\n" +
+                        //                "FHO: " + FHO + "\n" +
+                        //                "FHU: " + FHU + "\n" +
+                        //                "\n1x2\n" +
+                        //                "FH1: " + FH1 + "\n" +
+                        //                "FH2: " + FH2 + "\n" +
+                        //                "FHX: " + FHX + "\n"
+                        //                );
 
                         var reqparm_ = new NameValueCollection
                         {
@@ -875,7 +955,8 @@ namespace Odds_Grabber___wclub888
                             {"away_team_score", AwayScore.ToString()},
                             {"ref_match_id", ref_match_id},
                             {"odds_row_no", _row_no.ToString()},
-                            {"fthdp", (FTHDP.ToString() != "") ? FTHDP.ToString() : "0"},
+                            {"fthdph", (FTHDPH.ToString() != "") ? FTHDPH.ToString() : "0"},
+                            {"fthdpa", (FTHDPA.ToString() != "") ? FTHDPA.ToString() : "0"},
                             {"fth", (FTH.ToString() != "") ? FTH.ToString() : "0"},
                             {"fta", (FTA.ToString() != "") ? FTA.ToString() : "0"},
                             {"betidftou", (BetIDFTOU.ToString() != "") ? BetIDFTOU.ToString() : "0"},
@@ -890,7 +971,8 @@ namespace Odds_Grabber___wclub888
                             {"ftx", (FTX.ToString() != "") ? FTX.ToString() : "0"},
                             {"ft2", (FT2.ToString() != "") ? FT2.ToString() : "0"},
                             {"specialgame", (SpecialGame.ToString() != "") ? SpecialGame.ToString() : "0"},
-                            {"fhhdp", (FHHDP.ToString() != "") ? FHHDP.ToString() : "0"},
+                            {"fhhdph", (FHHDPH.ToString() != "") ? FHHDPH.ToString() : "0"},
+                            {"fhhdpa", (FHHDPA.ToString() != "") ? FHHDPA.ToString() : "0"},
                             {"fhh", (FHH.ToString() != "") ? FHH.ToString() : "0"},
                             {"fha", (FHA.ToString() != "") ? FHA.ToString() : "0"},
                             {"fhou", (FHOU.ToString() != "") ? FHOU.ToString() : "0"},
@@ -1044,6 +1126,23 @@ namespace Odds_Grabber___wclub888
                         DateTime KickOffDateTime_Replace = DateTime.ParseExact(KickOffDateTime.ToString(), "dd/MM HH:mm", CultureInfo.InvariantCulture);
                         KickOffDateTime = KickOffDateTime_Replace.ToString("yyyy-MM-dd HH:mm:ss");
                         JToken FTHDP = _jo.SelectToken("$.JSOdds[" + i + "][23]").ToString();
+                        if (FTHDP.ToString() == "-1")
+                        {
+                            FTHDP = "0";
+                        }
+                        JToken FTHDP_Detect = _jo.SelectToken("$.JSOdds[" + i + "][24]").ToString();
+                        String FTHDPH = "";
+                        String FTHDPA = "";
+                        if (FTHDP_Detect.ToString().ToLower() == "true")
+                        {
+                            FTHDPH = "-" + FTHDP;
+                            FTHDPA = "+" + FTHDP;
+                        }
+                        else
+                        {
+                            FTHDPA = "-" + FTHDP;
+                            FTHDPH = "+" + FTHDP;
+                        }
                         JToken FTH = _jo.SelectToken("$.JSOdds[" + i + "][35]").ToString().Trim().Replace(".", "");
                         string FTH_Replace = FTH.ToString().Replace("-", "");
                         if (FTH_Replace.Length == 1 && FTH_Replace != "0")
@@ -1051,6 +1150,7 @@ namespace Odds_Grabber___wclub888
                             FTH = FTH + "0";
                         }
                         FTH = Convert.ToDecimal(FTH) / 100;
+                        FTH = ___ConvertToEU(FTH.ToString());
                         JToken FTA = _jo.SelectToken("$.JSOdds[" + i + "][36]").ToString().Trim().Replace(".", "");
                         string FTA_Replace = FTA.ToString().Replace("-", "");
                         if (FTA_Replace.Length == 1 && FTA_Replace != "0")
@@ -1058,6 +1158,7 @@ namespace Odds_Grabber___wclub888
                             FTA = FTA + "0";
                         }
                         FTA = Convert.ToDecimal(FTA) / 100;
+                        FTA = ___ConvertToEU(FTA.ToString());
                         string BetIDFTOU = "";
                         JToken FTOU = _jo.SelectToken("$.JSOdds[" + i + "][41]").ToString();
                         JToken FTO = _jo.SelectToken("$.JSOdds[" + i + "][44]").ToString().Trim().Replace(".", "");
@@ -1067,6 +1168,7 @@ namespace Odds_Grabber___wclub888
                             FTO = FTO + "0";
                         }
                         FTO = Convert.ToDecimal(FTO) / 100;
+                        FTO = ___ConvertToEU(FTO.ToString());
                         JToken FTU = _jo.SelectToken("$.JSOdds[" + i + "][45]").ToString().Trim().Replace(".", "");
                         string FTU_Replace = FTU.ToString().Replace("-", "");
                         if (FTU_Replace.Length == 1 && FTU_Replace != "0")
@@ -1074,6 +1176,7 @@ namespace Odds_Grabber___wclub888
                             FTU = FTU + "0";
                         }
                         FTU = Convert.ToDecimal(FTU) / 100;
+                        FTU = ___ConvertToEU(FTU.ToString());
                         JToken FT1 = _jo.SelectToken("$.JSOdds[" + i + "][49]").ToString();
                         JToken FT2 = _jo.SelectToken("$.JSOdds[" + i + "][50]").ToString();
                         JToken FTX = _jo.SelectToken("$.JSOdds[" + i + "][51]").ToString();
@@ -1084,6 +1187,7 @@ namespace Odds_Grabber___wclub888
                             FTOdd = FTOdd + "0";
                         }
                         FTOdd = Convert.ToDecimal(FTOdd) / 100;
+                        FTOdd = ___ConvertToEU(FTOdd.ToString());
                         JToken FTEven = _jo.SelectToken("$.JSOdds[" + i + "][55]").ToString().Trim().Replace(".", "");
                         string FTEven_Replace = FTEven.ToString().Replace("-", "");
                         if (FTEven_Replace.Length == 1 && FTEven_Replace != "0")
@@ -1091,10 +1195,28 @@ namespace Odds_Grabber___wclub888
                             FTEven = FTEven + "0";
                         }
                         FTEven = Convert.ToDecimal(FTEven) / 100;
+                        FTEven = ___ConvertToEU(FTEven.ToString());
                         string BetIDFTOE = "";
                         string BetIDFT1X2 = "";
                         string SpecialGame = "";
                         JToken FHHDP = _jo.SelectToken("$.JSOdds[" + i + "][59]").ToString();
+                        if (FHHDP.ToString() == "-1")
+                        {
+                            FHHDP = "0";
+                        }
+                        JToken FHHDP_Detect = _jo.SelectToken("$.JSOdds[" + i + "][60]").ToString();
+                        String FHHDPH = "";
+                        String FHHDPA = "";
+                        if (FHHDP_Detect.ToString().ToLower() == "true")
+                        {
+                            FHHDPH = "-" + FHHDP;
+                            FHHDPA = "+" + FHHDP;
+                        }
+                        else
+                        {
+                            FHHDPA = "-" + FHHDP;
+                            FHHDPH = "+" + FHHDP;
+                        }
                         JToken FHH = _jo.SelectToken("$.JSOdds[" + i + "][63]").ToString().Trim().Replace(".", "");
                         string FHH_Replace = FHH.ToString().Replace("-", "");
                         if (FHH_Replace.Length == 1 && FHH_Replace != "0")
@@ -1102,6 +1224,7 @@ namespace Odds_Grabber___wclub888
                             FHH = FHH + "0";
                         }
                         FHH = Convert.ToDecimal(FHH) / 100;
+                        FHH = ___ConvertToEU(FHH.ToString());
                         JToken FHA = _jo.SelectToken("$.JSOdds[" + i + "][64]").ToString().Trim().Replace(".", "");
                         string FHA_Replace = FHA.ToString().Replace("-", "");
                         if (FHA_Replace.Length == 1 && FHA_Replace != "0")
@@ -1109,6 +1232,7 @@ namespace Odds_Grabber___wclub888
                             FHA = FHA + "0";
                         }
                         FHA = Convert.ToDecimal(FHA) / 100;
+                        FHA = ___ConvertToEU(FHA.ToString());
                         JToken FHOU = _jo.SelectToken("$.JSOdds[" + i + "][67]").ToString();
                         JToken FHO = _jo.SelectToken("$.JSOdds[" + i + "][70]").ToString().Trim().Replace(".", "");
                         string FHO_Replace = FHO.ToString().Replace("-", "");
@@ -1117,6 +1241,7 @@ namespace Odds_Grabber___wclub888
                             FHO = FHO + "0";
                         }
                         FHO = Convert.ToDecimal(FHO) / 100;
+                        FHO = ___ConvertToEU(FHO.ToString());
                         JToken FHU = _jo.SelectToken("$.JSOdds[" + i + "][71]").ToString().Trim().Replace(".", "");
                         string FHU_Replace = FHU.ToString().Replace("-", "");
                         if (FHU_Replace.Length == 1 && FHU_Replace != "0")
@@ -1124,6 +1249,7 @@ namespace Odds_Grabber___wclub888
                             FHU = FHU + "0";
                         }
                         FHU = Convert.ToDecimal(FHU) / 100;
+                        FHU = ___ConvertToEU(FHU.ToString());
                         JToken FH1 = _jo.SelectToken("$.JSOdds[" + i + "][75]").ToString();
                         JToken FH2 = _jo.SelectToken("$.JSOdds[" + i + "][76]").ToString();
                         JToken FHX = _jo.SelectToken("$.JSOdds[" + i + "][77]").ToString();
@@ -1145,18 +1271,53 @@ namespace Odds_Grabber___wclub888
 
                         _last_ref_id = ref_match_id;
 
-                        if (HomeTeamName.ToString().ToLower().Contains("vs") || AwayTeamName.ToString().ToLower().Contains("vs"))
+                        if (HomeTeamName.ToString().ToLower().Contains(" vs ") || AwayTeamName.ToString().ToLower().Contains(" vs "))
                         {
                             string[] replace = HomeTeamName.ToString().Split(new string[] { "Vs" }, StringSplitOptions.None);
                             HomeTeamName = replace[0].Trim();
                             AwayTeamName = replace[1].Trim();
                         }
-                        else if (HomeTeamName.ToString().ToLower().Contains("+") || AwayTeamName.ToString().ToLower().Contains("+"))
-                        {
-                            string[] replace = HomeTeamName.ToString().Split('+');
-                            HomeTeamName = replace[0].Trim();
-                            AwayTeamName = replace[1].Trim();
-                        }
+
+                        //MessageBox.Show(
+                        //                "LeagueName: " + LeagueName + "\n" +
+                        //                "MatchID: " + ref_match_id + "\n" +
+                        //                "_row_no: " + _row_no + "\n" +
+                        //                "HomeTeamName: " + HomeTeamName + "\n" +
+                        //                "HomeTeamName: " + AwayTeamName + "\n" +
+                        //                "HomeScore: " + HomeScore + "\n" +
+                        //                "AwayScore: " + AwayScore + "\n" +
+                        //                "KickOffDateTime: " + KickOffDateTime + "\n" +
+                        //                "StatementDate: " + StatementDate + "\n" +
+                        //                "\n-FTHDP-\n" +
+                        //                "FTHDPH: " + FTHDPH + "\n" +
+                        //                "FTHDPA: " + FTHDPA + "\n" +
+                        //                "FTH: " + FTH + "\n" +
+                        //                "FTA: " + FTA + "\n" +
+                        //                "\nFTOU\n" +
+                        //                "FTOU: " + FTOU + "\n" +
+                        //                "FTO: " + FTO + "\n" +
+                        //                "FTU: " + FTU + "\n" +
+                        //                "\n1x2\n" +
+                        //                "FT1: " + FT1 + "\n" +
+                        //                "FT2: " + FT2 + "\n" +
+                        //                "FTX: " + FTX + "\n" +
+                        //                "\nOdd\n" +
+                        //                "FTOdd: " + FTOdd + "\n" +
+                        //                "FTEven: " + FTEven + "\n" +
+                        //                "\n-FHHDP-\n" +
+                        //                "FHHDPH: " + FHHDPH + "\n" +
+                        //                "FHHDPA: " + FHHDPA + "\n" +
+                        //                "FHH: " + FHH + "\n" +
+                        //                "FHA: " + FHA + "\n" +
+                        //                "\nFHOU\n" +
+                        //                "FHOU: " + FHOU + "\n" +
+                        //                "FHO: " + FHO + "\n" +
+                        //                "FHU: " + FHU + "\n" +
+                        //                "\n1x2\n" +
+                        //                "FH1: " + FH1 + "\n" +
+                        //                "FH2: " + FH2 + "\n" +
+                        //                "FHX: " + FHX + "\n"
+                        //                );
 
                         var reqparm_ = new NameValueCollection
                         {
@@ -1169,7 +1330,8 @@ namespace Odds_Grabber___wclub888
                             {"away_team_score", AwayScore.ToString()},
                             {"ref_match_id", ref_match_id},
                             {"odds_row_no", _row_no.ToString()},
-                            {"fthdp", (FTHDP.ToString() != "") ? FTHDP.ToString() : "0"},
+                            {"fthdph", (FTHDPH.ToString() != "") ? FTHDPH.ToString() : "0"},
+                            {"fthdpa", (FTHDPA.ToString() != "") ? FTHDPA.ToString() : "0"},
                             {"fth", (FTH.ToString() != "") ? FTH.ToString() : "0"},
                             {"fta", (FTA.ToString() != "") ? FTA.ToString() : "0"},
                             {"betidftou", (BetIDFTOU.ToString() != "") ? BetIDFTOU.ToString() : "0"},
@@ -1184,7 +1346,8 @@ namespace Odds_Grabber___wclub888
                             {"ftx", (FTX.ToString() != "") ? FTX.ToString() : "0"},
                             {"ft2", (FT2.ToString() != "") ? FT2.ToString() : "0"},
                             {"specialgame", (SpecialGame.ToString() != "") ? SpecialGame.ToString() : "0"},
-                            {"fhhdp", (FHHDP.ToString() != "") ? FHHDP.ToString() : "0"},
+                            {"fhhdph", (FHHDPH.ToString() != "") ? FHHDPH.ToString() : "0"},
+                            {"fhhdpa", (FHHDPA.ToString() != "") ? FHHDPA.ToString() : "0"},
                             {"fhh", (FHH.ToString() != "") ? FHH.ToString() : "0"},
                             {"fha", (FHA.ToString() != "") ? FHA.ToString() : "0"},
                             {"fhou", (FHOU.ToString() != "") ? FHOU.ToString() : "0"},
@@ -1321,7 +1484,7 @@ namespace Odds_Grabber___wclub888
                 {
                     {"MixParlay", "false"},
                     {"sportId", "1"},
-                    {"oddsStyle", "1"},
+                    {"oddsStyle", "2"},
                     {"lang", "en"},
                     {"OrderBy", "0"},
                     {"lineStyle", "0"},
@@ -1400,15 +1563,9 @@ namespace Odds_Grabber___wclub888
                         }
 
                         // Home Away Team
-                        if (HomeTeamName.ToString().ToLower().Contains("vs") || AwayTeamName.ToString().ToLower().Contains("vs"))
+                        if (HomeTeamName.ToString().ToLower().Contains(" vs ") || AwayTeamName.ToString().ToLower().Contains(" vs "))
                         {
                             string[] replace = HomeTeamName.ToString().Split(new string[] { "Vs" }, StringSplitOptions.None);
-                            HomeTeamName = replace[0].Trim();
-                            AwayTeamName = replace[1].Trim();
-                        }
-                        else if (HomeTeamName.ToString().ToLower().Contains("+") || AwayTeamName.ToString().ToLower().Contains("+"))
-                        {
-                            string[] replace = HomeTeamName.ToString().Split('+');
                             HomeTeamName = replace[0].Trim();
                             AwayTeamName = replace[1].Trim();
                         }
@@ -1437,7 +1594,6 @@ namespace Odds_Grabber___wclub888
                                     FT1 = _jo.SelectToken("$.Data.MH[" + i + "].MK.5[0][1]").ToString();
                                     FT2 = _jo.SelectToken("$.Data.MH[" + i + "].MK.5[0][2]").ToString();
                                     FTX = _jo.SelectToken("$.Data.MH[" + i + "].MK.5[0][3]").ToString();
-
                                 }
                                 catch (Exception err)
                                 {
@@ -1450,7 +1606,6 @@ namespace Odds_Grabber___wclub888
                                     FH1 = _jo.SelectToken("$.Data.MH[" + i + "].MK.6[0][1]").ToString();
                                     FH2 = _jo.SelectToken("$.Data.MH[" + i + "].MK.6[0][2]").ToString();
                                     FHX = _jo.SelectToken("$.Data.MH[" + i + "].MK.6[0][3]").ToString();
-
                                 }
                                 catch (Exception err)
                                 {
@@ -1460,6 +1615,8 @@ namespace Odds_Grabber___wclub888
 
                             // FTHDP -----
                             JToken FTHDP = "";
+                            String FTHDPH = "";
+                            String FTHDPA = "";
                             JToken FTH = "";
                             JToken FTA = "";
                             try
@@ -1467,6 +1624,24 @@ namespace Odds_Grabber___wclub888
                                 FTH = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][1]").ToString();
                                 FTA = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][2]").ToString();
                                 FTHDP = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][3]").ToString();
+                                if (FTHDP.ToString() != "0.0")
+                                {
+                                    if (FTHDP.ToString().Contains("-"))
+                                    {
+                                        FTHDPH = FTHDP.ToString();
+                                        FTHDPA = FTHDP.ToString().Replace("-", "+");
+                                    }
+                                    else
+                                    {
+                                        FTHDPH = "+" + FTHDP.ToString();
+                                        FTHDPA = "-" + FTHDP.ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    FTHDPH = "-0";
+                                    FTHDPA = "+0";
+                                }
                                 _is_all = true;
                             }
                             catch (Exception err)
@@ -1508,6 +1683,8 @@ namespace Odds_Grabber___wclub888
 
                             // FHHDP -----
                             JToken FHHDP = "";
+                            String FHHDPH = "";
+                            String FHHDPA = "";
                             JToken FHH = "";
                             JToken FHA = "";
                             try
@@ -1515,6 +1692,24 @@ namespace Odds_Grabber___wclub888
                                 FHH = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][1]").ToString();
                                 FHA = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][2]").ToString();
                                 FHHDP = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][3]").ToString();
+                                if (FHHDP.ToString() != "0.0")
+                                {
+                                    if (FHHDP.ToString().Contains("-"))
+                                    {
+                                        FHHDPH = FHHDP.ToString();
+                                        FHHDPA = FHHDP.ToString().Replace("-", "+");
+                                    }
+                                    else
+                                    {
+                                        FHHDPH = "+" + FHHDP.ToString();
+                                        FHHDPA = "-" + FHHDP.ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    FHHDPH = "-0";
+                                    FHHDPA = "+0";
+                                }
                                 _is_all = true;
                             }
                             catch (Exception err)
@@ -1527,6 +1722,49 @@ namespace Odds_Grabber___wclub888
 
                             }
 
+                            //MessageBox.Show("1\n" +
+                            //                "LeagueName: " + LeagueName + "\n" +
+                            //                "MatchID: " + ref_match_id + "\n" +
+                            //                "_row_no: " + _row_no + "\n" +
+                            //                "HomeTeamName: " + HomeTeamName + "\n" +
+                            //                "HomeTeamName: " + AwayTeamName + "\n" +
+                            //                "HomeScore: " + HomeScore + "\n" +
+                            //                "AwayScore: " + AwayScore + "\n" +
+                            //                "MatchTimeHalf: " + MatchTimeHalf + "\n" +
+                            //                "MatchTimeMinute: " + MatchTimeMinute + "\n" +
+                            //                //"KickOffDateTime: " + KickOffDateTime + "\n" +
+                            //                //"StatementDate: " + StatementDate + "\n" +
+                            //                "\n-FTHDP-\n" +
+                            //                "FTHDPH: " + FTHDPH + "\n" +
+                            //                "FTHDPA: " + FTHDPA + "\n" +
+                            //                "FTH: " + FTH + "\n" +
+                            //                "FTA: " + FTA + "\n" +
+                            //                "\nFTOU\n" +
+                            //                "FTOU: " + FTOU + "\n" +
+                            //                "FTO: " + FTO + "\n" +
+                            //                "FTU: " + FTU + "\n" +
+                            //                "\n1x2\n" +
+                            //                "FT1: " + FT1 + "\n" +
+                            //                "FT2: " + FT2 + "\n" +
+                            //                "FTX: " + FTX + "\n" +
+                            //                //"\nOdd\n" +
+                            //                //"FTOdd: " + FTOdd + "\n" +
+                            //                //"FTEven: " + FTEven + "\n" +
+                            //                "\n-FHHDP-\n" +
+                            //                "FHHDPH: " + FHHDPH + "\n" +
+                            //                "FHHDPA: " + FHHDPA + "\n" +
+                            //                "FHH: " + FHH + "\n" +
+                            //                "FHA: " + FHA + "\n" +
+                            //                "\nFHOU\n" +
+                            //                "FHOU: " + FHOU + "\n" +
+                            //                "FHO: " + FHO + "\n" +
+                            //                "FHU: " + FHU + "\n" +
+                            //                "\n1x2\n" +
+                            //                "FH1: " + FH1 + "\n" +
+                            //                "FH2: " + FH2 + "\n" +
+                            //                "FHX: " + FHX + "\n"
+                            //                );
+
                             var reqparm_ = new NameValueCollection
                             {
                                 {"source_id", "4"},
@@ -1534,11 +1772,12 @@ namespace Odds_Grabber___wclub888
                                 {"league_name", LeagueName.ToString().Trim()},
                                 {"home_team", HomeTeamName.ToString().Trim()},
                                 {"away_team", AwayTeamName.ToString().Trim()},
-                                {"home_team_score", (FTHDP.ToString() != "") ? HomeScore.ToString() : "0"},
-                                {"away_team_score", (FTHDP.ToString() != "") ? AwayScore.ToString() : "0"},
+                                {"home_team_score", (HomeScore.ToString() != "") ? HomeScore.ToString() : "0"},
+                                {"away_team_score", (AwayScore.ToString() != "") ? AwayScore.ToString() : "0"},
                                 {"ref_match_id", MatchID.ToString()},
                                 {"odds_row_no", _row_no.ToString()},
-                                {"fthdp", (FTHDP.ToString() != "") ? FTHDP.ToString() : "0"},
+                                {"fthdph", (FTHDPH.ToString() != "") ? FTHDPH.ToString() : "0"},
+                                {"fthdpa", (FTHDPA.ToString() != "") ? FTHDPA.ToString() : "0"},
                                 {"fth", (FTH.ToString() != "") ? FTH.ToString() : "0"},
                                 {"fta", (FTA.ToString() != "") ? FTA.ToString() : "0"},
                                 {"betidftou", "0"},
@@ -1553,7 +1792,8 @@ namespace Odds_Grabber___wclub888
                                 {"ftx", (FTX.ToString() != "") ? FTX.ToString() : "0"},
                                 {"ft2", (FT2.ToString() != "") ? FT2.ToString() : "0"},
                                 {"specialgame", "0"},
-                                {"fhhdp", (FHHDP.ToString() != "") ? FHHDP.ToString() : "0"},
+                                {"fhhdph", (FHHDPH.ToString() != "") ? FHHDPH.ToString() : "0"},
+                                {"fhhdpa", (FHHDPA.ToString() != "") ? FHHDPA.ToString() : "0"},
                                 {"fhh", (FHH.ToString() != "") ? FHH.ToString() : "0"},
                                 {"fha", (FHA.ToString() != "") ? FHA.ToString() : "0"},
                                 {"fhou", (FHOU.ToString() != "") ? FHOU.ToString() : "0"},
@@ -1672,7 +1912,7 @@ namespace Odds_Grabber___wclub888
                 {
                     {"MixParlay", "false"},
                     {"sportId", "1"},
-                    {"oddsStyle", "1"},
+                    {"oddsStyle", "2"},
                     {"lang", "en"},
                     {"OrderBy", "0"},
                     {"lineStyle", "0"},
@@ -1730,15 +1970,9 @@ namespace Odds_Grabber___wclub888
                         }
 
                         // Home Away Team
-                        if (HomeTeamName.ToString().ToLower().Contains("vs") || AwayTeamName.ToString().ToLower().Contains("vs"))
+                        if (HomeTeamName.ToString().ToLower().Contains(" vs ") || AwayTeamName.ToString().ToLower().Contains(" vs "))
                         {
                             string[] replace = HomeTeamName.ToString().Split(new string[] { "Vs" }, StringSplitOptions.None);
-                            HomeTeamName = replace[0].Trim();
-                            AwayTeamName = replace[1].Trim();
-                        }
-                        else if (HomeTeamName.ToString().ToLower().Contains("+") || AwayTeamName.ToString().ToLower().Contains("+"))
-                        {
-                            string[] replace = HomeTeamName.ToString().Split('+');
                             HomeTeamName = replace[0].Trim();
                             AwayTeamName = replace[1].Trim();
                         }
@@ -1786,6 +2020,8 @@ namespace Odds_Grabber___wclub888
 
                             // FTHDP -----
                             JToken FTHDP = "";
+                            String FTHDPH = "";
+                            String FTHDPA = "";
                             JToken FTH = "";
                             JToken FTA = "";
                             try
@@ -1793,6 +2029,24 @@ namespace Odds_Grabber___wclub888
                                 FTH = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][1]").ToString();
                                 FTA = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][2]").ToString();
                                 FTHDP = _jo.SelectToken("$.Data.MH[" + i + "].MK.1[" + count + "][3]").ToString();
+                                if (FTHDP.ToString() != "0.0")
+                                {
+                                    if (FTHDP.ToString().Contains("-"))
+                                    {
+                                        FTHDPH = FTHDP.ToString();
+                                        FTHDPA = FTHDP.ToString().Replace("-", "+");
+                                    }
+                                    else
+                                    {
+                                        FTHDPH = "+" + FTHDP.ToString();
+                                        FTHDPA = "-" + FTHDP.ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    FTHDPH = "-0";
+                                    FTHDPA = "+0";
+                                }
                                 _is_all = true;
                             }
                             catch (Exception err)
@@ -1834,6 +2088,8 @@ namespace Odds_Grabber___wclub888
 
                             // FHHDP -----
                             JToken FHHDP = "";
+                            String FHHDPH = "";
+                            String FHHDPA = "";
                             JToken FHH = "";
                             JToken FHA = "";
                             try
@@ -1841,12 +2097,73 @@ namespace Odds_Grabber___wclub888
                                 FHH = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][1]").ToString();
                                 FHA = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][2]").ToString();
                                 FHHDP = _jo.SelectToken("$.Data.MH[" + i + "].MK.2[" + count + "][3]").ToString();
+                                if (FHHDP.ToString() != "0.0")
+                                {
+                                    if (FHHDP.ToString().Contains("-"))
+                                    {
+                                        FHHDPH = FHHDP.ToString();
+                                        FHHDPA = FHHDP.ToString().Replace("-", "+");
+                                    }
+                                    else
+                                    {
+                                        FHHDPH = "+" + FHHDP.ToString();
+                                        FHHDPA = "-" + FHHDP.ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    FHHDPH = "-0";
+                                    FHHDPA = "+0";
+                                }
                                 _is_all = true;
                             }
                             catch (Exception err)
                             {
                                 _is_all = false;
                             }
+
+                            //MessageBox.Show(
+                            //                "LeagueName: " + LeagueName + "\n" +
+                            //                "MatchID: " + ref_match_id + "\n" +
+                            //                "_row_no: " + _row_no + "\n" +
+                            //                "HomeTeamName: " + HomeTeamName + "\n" +
+                            //                "HomeTeamName: " + AwayTeamName + "\n" +
+                            //                //"HomeScore: " + HomeScore + "\n" +
+                            //                //"AwayScore: " + AwayScore + "\n" +
+                            //                //"MatchTimeHalf: " + MatchTimeHalf + "\n" +
+                            //                //"MatchTimeMinute: " + MatchTimeMinute + "\n" +
+                            //                //"KickOffDateTime: " + KickOffDateTime + "\n" +
+                            //                //"StatementDate: " + StatementDate + "\n" +
+                            //                "\n-FTHDP-\n" +
+                            //                "FTHDPH: " + FTHDPH + "\n" +
+                            //                "FTHDPA: " + FTHDPA + "\n" +
+                            //                "FTH: " + FTH + "\n" +
+                            //                "FTA: " + FTA + "\n" +
+                            //                "\nFTOU\n" +
+                            //                "FTOU: " + FTOU + "\n" +
+                            //                "FTO: " + FTO + "\n" +
+                            //                "FTU: " + FTU + "\n" +
+                            //                "\n1x2\n" +
+                            //                "FT1: " + FT1 + "\n" +
+                            //                "FT2: " + FT2 + "\n" +
+                            //                "FTX: " + FTX + "\n" +
+                            //                //"\nOdd\n" +
+                            //                //"FTOdd: " + FTOdd + "\n" +
+                            //                //"FTEven: " + FTEven + "\n" +
+                            //                "\n-FHHDP-\n" +
+                            //                "FHHDPH: " + FHHDPH + "\n" +
+                            //                "FHHDPA: " + FHHDPA + "\n" +
+                            //                "FHH: " + FHH + "\n" +
+                            //                "FHA: " + FHA + "\n" +
+                            //                "\nFHOU\n" +
+                            //                "FHOU: " + FHOU + "\n" +
+                            //                "FHO: " + FHO + "\n" +
+                            //                "FHU: " + FHU + "\n" +
+                            //                "\n1x2\n" +
+                            //                "FH1: " + FH1 + "\n" +
+                            //                "FH2: " + FH2 + "\n" +
+                            //                "FHX: " + FHX + "\n"
+                            //                );
 
                             if (_is_all)
                             {
@@ -1861,7 +2178,8 @@ namespace Odds_Grabber___wclub888
                                     {"away_team_score", "0"},
                                     {"ref_match_id", MatchID.ToString()},
                                     {"odds_row_no", _row_no.ToString()},
-                                    {"fthdp", (FTHDP.ToString() != "") ? FTHDP.ToString() : "0"},
+                                    {"fthdph", (FTHDPH.ToString() != "") ? FTHDPH.ToString() : "0"},
+                                    {"fthdpa", (FTHDPA.ToString() != "") ? FTHDPA.ToString() : "0"},
                                     {"fth", (FTH.ToString() != "") ? FTH.ToString() : "0"},
                                     {"fta", (FTA.ToString() != "") ? FTA.ToString() : "0"},
                                     {"betidftou", "0"},
@@ -1876,7 +2194,8 @@ namespace Odds_Grabber___wclub888
                                     {"ftx", (FTX.ToString() != "") ? FTX.ToString() : "0"},
                                     {"ft2", (FT2.ToString() != "") ? FT2.ToString() : "0"},
                                     {"specialgame", "0"},
-                                    {"fhhdp", (FHHDP.ToString() != "") ? FHHDP.ToString() : "0"},
+                                    {"fhhdph", (FHHDPH.ToString() != "") ? FHHDPH.ToString() : "0"},
+                                    {"fhhdpa", (FHHDPA.ToString() != "") ? FHHDPA.ToString() : "0"},
                                     {"fhh", (FHH.ToString() != "") ? FHH.ToString() : "0"},
                                     {"fha", (FHA.ToString() != "") ? FHA.ToString() : "0"},
                                     {"fhou", (FHOU.ToString() != "") ? FHOU.ToString() : "0"},
@@ -2036,6 +2355,26 @@ namespace Odds_Grabber___wclub888
             using (StreamWriter sw = new StreamWriter(_flag, true))
             {
                 sw.WriteLine("<<>>" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "<<>>");
+            }
+        }
+
+        private string ___ConvertToEU(string num)
+        {
+            if (num != "0" && !String.IsNullOrEmpty(num))
+            {
+                if (num.Contains("-"))
+                {
+
+                    return Convert.ToDecimal(Math.Round((-1 / Convert.ToDecimal(num.Trim())) + 1, 2).ToString().Trim()).ToString("N2");
+                }
+                else
+                {
+                    return Convert.ToDecimal(Math.Round(Convert.ToDecimal(num.Trim()) + 1, 2).ToString().Trim()).ToString("N2");
+                }
+            }
+            else
+            {
+                return "0";
             }
         }
     }
