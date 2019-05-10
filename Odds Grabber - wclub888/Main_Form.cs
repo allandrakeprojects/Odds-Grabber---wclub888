@@ -11,6 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -34,6 +35,8 @@ namespace Odds_Grabber___wclub888
         private string __running_02 = "tbs";
         private string __running_11 = "WFT";
         private string __running_22 = "TBS";
+        private string __app_detect_running = "WCLUB888";
+        private string __local_ip = "";
         private int __send = 0;
         private int __r = 14;
         private int __g = 53;
@@ -466,9 +469,28 @@ namespace Odds_Grabber___wclub888
             }
         }
 
+        private void ___GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    __local_ip = ip.ToString();
+                }
+            }
+        }
+
         private void timer_detect_running_Tick(object sender, EventArgs e)
         {
-            //___DetectRunningAsync();
+            if (!String.IsNullOrEmpty(__local_ip))
+            {
+                ___DetectRunningAsync();
+            }
+            else
+            {
+                ___GetLocalIPAddress();
+            }
         }
 
         private async void ___DetectRunningAsync()
@@ -476,7 +498,7 @@ namespace Odds_Grabber___wclub888
             try
             {
                 string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                string password = __brand_code + datetime + "youdieidie";
+                string password = __app_detect_running + "youdieidie";
                 byte[] encodedPassword = new UTF8Encoding().GetBytes(password);
                 byte[] hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(encodedPassword);
                 string token = BitConverter.ToString(hash)
@@ -487,13 +509,13 @@ namespace Odds_Grabber___wclub888
                 {
                     var data = new NameValueCollection
                     {
-                        ["brand_code"] = __brand_code,
-                        ["app_type"] = __app_type,
+                        ["bot_name"] = __app_detect_running,
                         ["last_update"] = datetime,
-                        ["token"] = token
+                        ["token"] = token,
+                        ["my_ip"] = __local_ip
                     };
 
-                    var response = wb.UploadValues("http://192.168.10.252:8080/API/updateAppStatus", "POST", data);
+                    var response = wb.UploadValues("http://zeus.ssitex.com:8080/API/updateAppStatusABC", "POST", data);
                     string responseInString = Encoding.UTF8.GetString(response);
                 }
                 __send = 0;
@@ -529,7 +551,7 @@ namespace Odds_Grabber___wclub888
             try
             {
                 string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                string password = __brand_code + datetime + "youdieidie";
+                string password = __app_detect_running + "youdieidie";
                 byte[] encodedPassword = new UTF8Encoding().GetBytes(password);
                 byte[] hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(encodedPassword);
                 string token = BitConverter.ToString(hash)
@@ -540,13 +562,13 @@ namespace Odds_Grabber___wclub888
                 {
                     var data = new NameValueCollection
                     {
-                        ["brand_code"] = __brand_code,
-                        ["app_type"] = __app_type,
+                        ["bot_name"] = __app_detect_running,
                         ["last_update"] = datetime,
-                        ["token"] = token
+                        ["token"] = token,
+                        ["my_ip"] = __local_ip
                     };
 
-                    var response = wb.UploadValues("http://zeus.ssitex.com:8080/API/updateAppStatus", "POST", data);
+                    var response = wb.UploadValues("http://zeus2.ssitex.com:8080/API/updateAppStatusABC", "POST", data);
                     string responseInString = Encoding.UTF8.GetString(response);
                 }
                 __send = 0;
