@@ -40,7 +40,6 @@ namespace Odds_Grabber___wclub888
         private int __b = 96;
         private bool __is_close;
         private bool __is_login = false;
-        private bool __is_send = false;
         private bool __m_aeroEnabled;
         Form __mainFormHandler;
 
@@ -324,15 +323,18 @@ namespace Odds_Grabber___wclub888
 
         private void panel1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (__is_send)
+            if (Properties.Settings.Default.______is_send_telegram)
             {
-                __is_send = false;
-                MessageBox.Show("Telegram Notification is Disabled.", __brand_code + " " + __app, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Properties.Settings.Default.______is_send_telegram = false;
+                Properties.Settings.Default.Save();
+
+                MessageBox.Show("Telegram Notification is Disabled.", __app__website_name, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                __is_send = true;
-                MessageBox.Show("Telegram Notification is Enabled.", __brand_code + " " + __app, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Properties.Settings.Default.______is_send_telegram = true;
+                Properties.Settings.Default.Save();
+                MessageBox.Show("Telegram Notification is Enabled.", __app__website_name, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -415,48 +417,51 @@ namespace Odds_Grabber___wclub888
 
         private void SendABCTeam(string message)
         {
-            try
+            if (Properties.Settings.Default.______is_send_telegram)
             {
-                string datetime = DateTime.Now.ToString("dd MMM HH:mm:ss");
-                string urlString = "https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}";
-                string apiToken = "651945130:AAGMFj-C4wX0yElG2dBU1SRbfrNZi75jPHg";
-                string chatId = "@odds_bot_abc_team";
-                string text = "Bot:%20-----" + __website_name.ToUpper() + "-----%0ADate%20and%20Time:%20[" + datetime + "]%0AMessage:%20<b>" + message + "</>&parse_mode=html";
-                urlString = String.Format(urlString, apiToken, chatId, text);
-                WebRequest request = WebRequest.Create(urlString);
-                Stream rs = request.GetResponse().GetResponseStream();
-                StreamReader reader = new StreamReader(rs);
-                string line = "";
-                StringBuilder sb = new StringBuilder();
-                while (line != null)
+                try
                 {
-                    line = reader.ReadLine();
-                    if (line != null)
-                        sb.Append(line);
-                }
-                __send = 0;
-            }
-            catch (Exception err)
-            {
-                __send++;
-
-                if (___CheckForInternetConnection())
-                {
-                    if (__send == 5)
+                    string datetime = DateTime.Now.ToString("dd MMM HH:mm:ss");
+                    string urlString = "https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}";
+                    string apiToken = "651945130:AAGMFj-C4wX0yElG2dBU1SRbfrNZi75jPHg";
+                    string chatId = "@odds_bot_abc_team";
+                    string text = "Bot:%20-----" + __website_name.ToUpper() + "-----%0ADate%20and%20Time:%20[" + datetime + "]%0AMessage:%20<b>" + message + "</>&parse_mode=html";
+                    urlString = String.Format(urlString, apiToken, chatId, text);
+                    WebRequest request = WebRequest.Create(urlString);
+                    Stream rs = request.GetResponse().GetResponseStream();
+                    StreamReader reader = new StreamReader(rs);
+                    string line = "";
+                    StringBuilder sb = new StringBuilder();
+                    while (line != null)
                     {
-                        __Flag();
-                        __is_close = false;
-                        Environment.Exit(0);
+                        line = reader.ReadLine();
+                        if (line != null)
+                            sb.Append(line);
+                    }
+                    __send = 0;
+                }
+                catch (Exception err)
+                {
+                    __send++;
+
+                    if (___CheckForInternetConnection())
+                    {
+                        if (__send == 5)
+                        {
+                            __Flag();
+                            __is_close = false;
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            SendABCTeam(message);
+                        }
                     }
                     else
                     {
-                        SendABCTeam(message);
+                        __is_close = false;
+                        Environment.Exit(0);
                     }
-                }
-                else
-                {
-                    __is_close = false;
-                    Environment.Exit(0);
                 }
             }
         }
@@ -1403,7 +1408,8 @@ namespace Odds_Grabber___wclub888
                     }
                 }
 
-                if (!Properties.Settings.Default.______odds_iswaiting_01 && Properties.Settings.Default.______odds_issend_01)
+                // send wft
+                if (Properties.Settings.Default.______odds_issend_01)
                 {
                     Properties.Settings.Default.______odds_issend_01 = false;
                     Properties.Settings.Default.Save();
@@ -1411,8 +1417,9 @@ namespace Odds_Grabber___wclub888
                     SendABCTeam(__running_11 + " Back to Normal.");
                 }
 
-                Properties.Settings.Default.______odds_iswaiting_01 = false;
-                Properties.Settings.Default.Save();
+                // comment detect
+                //Properties.Settings.Default.______odds_iswaiting_01 = false;
+                //Properties.Settings.Default.Save();
 
                 Invoke(new Action(() =>
                 {
@@ -2256,8 +2263,8 @@ namespace Odds_Grabber___wclub888
                     }
                 }
 
-                // send msports 
-                if (!Properties.Settings.Default.______odds_iswaiting_02 && Properties.Settings.Default.______odds_issend_02)
+                // send tbs 
+                if (Properties.Settings.Default.______odds_issend_02)
                 {
                     Properties.Settings.Default.______odds_issend_02 = false;
                     Properties.Settings.Default.Save();
@@ -2265,8 +2272,9 @@ namespace Odds_Grabber___wclub888
                     SendABCTeam(__running_22 + " Back to Normal.");
                 }
 
-                Properties.Settings.Default.______odds_iswaiting_02 = false;
-                Properties.Settings.Default.Save();
+                // comment detect
+                //Properties.Settings.Default.______odds_iswaiting_02 = false;
+                //Properties.Settings.Default.Save();
 
                 Invoke(new Action(() =>
                 {
@@ -2330,7 +2338,7 @@ namespace Odds_Grabber___wclub888
         private async Task ___TaskWait()
         {
             Random _random = new Random();
-            int _random_number = _random.Next(10, 16);
+            int _random_number = _random.Next(25, 30);
             string _randowm_number_replace = _random_number.ToString() + "000";
             await Task.Delay(Convert.ToInt32(_randowm_number_replace));
         }
