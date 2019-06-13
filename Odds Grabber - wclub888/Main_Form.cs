@@ -158,15 +158,15 @@ namespace Odds_Grabber___wclub888
             InitializeComponent();
 
             // Settings
-            __root_url = Properties.Settings.Default.______root_url.ToString();
-            __root_url_equals = Properties.Settings.Default.______root_url_equals.ToString();
-            __root_url_login = Properties.Settings.Default.______root_url_login.ToString();
-            __WFT_running = Properties.Settings.Default.______WFT_running.ToString();
-            __WFT_not_running = Properties.Settings.Default.______WFT_not_running.ToString();
-            __TBS_running = Properties.Settings.Default.______TBS_running.ToString();
-            __TBS_not_running = Properties.Settings.Default.______TBS_not_running.ToString();
-            __username = Properties.Settings.Default.______username.ToString();
-            __password = Properties.Settings.Default.______password.ToString();
+            __root_url = Properties.Settings.Default.______root_url.ToString().Replace("amp;", "");
+            __root_url_equals = Properties.Settings.Default.______root_url_equals.ToString().Replace("amp;", "");
+            __root_url_login = Properties.Settings.Default.______root_url_login.ToString().Replace("amp;", "");
+            __WFT_running = Properties.Settings.Default.______WFT_running.ToString().Replace("amp;", "");
+            __WFT_not_running = Properties.Settings.Default.______WFT_not_running.ToString().Replace("amp;", "");
+            __TBS_running = Properties.Settings.Default.______TBS_running.ToString().Replace("amp;", "");
+            __TBS_not_running = Properties.Settings.Default.______TBS_not_running.ToString().Replace("amp;", "");
+            __username = Properties.Settings.Default.______username.ToString().Replace("amp;", "");
+            __password = Properties.Settings.Default.______password.ToString().Replace("amp;", "");
 
             //MessageBox.Show(Properties.Settings.Default.______is_send_telegram.ToString() + "\n" + __root_url + "\n" + __root_url_equals + "\n" + __root_url_login + "\n" + __WFT_running + "\n" + __WFT_not_running + "\n" + __TBS_running + "\n" + __TBS_not_running + "\n" + __username + "\n" + __password);
             // End of Settings
