@@ -82,5 +82,115 @@ namespace Odds_Grabber___wclub888.Properties {
                 this["______is_send_telegram"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.wclub888.com/Web/home.aspx")]
+        public string ______root_url {
+            get {
+                return ((string)(this["______root_url"]));
+            }
+            set {
+                this["______root_url"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.wclub888.com/Web/home.aspx")]
+        public string ______root_url_equals {
+            get {
+                return ((string)(this["______root_url_equals"]));
+            }
+            set {
+                this["______root_url_equals"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.wclub888.com/Web/w-sport.aspx")]
+        public string ______root_url_login {
+            get {
+                return ((string)(this["______root_url_login"]));
+            }
+            set {
+                this["______root_url_login"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sports.wclub888.com/_View/RMOdds2GenRun.aspx?ot=t&update=false&sa=false&tv" +
+            "=0&tf=-1&TFStatus=0&mt=0&r=1038308059&t=")]
+        public string ______WFT_running {
+            get {
+                return ((string)(this["______WFT_running"]));
+            }
+            set {
+                this["______WFT_running"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sports.wclub888.com/_View/RMOdds2Gen.aspx?ot=t&update=false&sa=false&tv=0&" +
+            "tf=-1&TFStatus=0&mt=0&r=342146139&t=")]
+        public string ______WFT_not_running {
+            get {
+                return ((string)(this["______WFT_not_running"]));
+            }
+            set {
+                this["______WFT_not_running"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sport.ugamingservice.com/api/grid/GetOdds")]
+        public string ______TBS_running {
+            get {
+                return ((string)(this["______TBS_running"]));
+            }
+            set {
+                this["______TBS_running"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://sport.ugamingservice.com/api/grid/GetOdds")]
+        public string ______TBS_not_running {
+            get {
+                return ((string)(this["______TBS_not_running"]));
+            }
+            set {
+                this["______TBS_not_running"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("nasrii042318")]
+        public string ______username {
+            get {
+                return ((string)(this["______username"]));
+            }
+            set {
+                this["______username"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AAaa1111")]
+        public string ______password {
+            get {
+                return ((string)(this["______password"]));
+            }
+            set {
+                this["______password"] = value;
+            }
+        }
     }
 }

@@ -17,5 +17,32 @@
     <Setting Name="______is_send_telegram" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="______root_url" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.wclub888.com/Web/home.aspx</Value>
+    </Setting>
+    <Setting Name="______root_url_equals" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.wclub888.com/Web/home.aspx</Value>
+    </Setting>
+    <Setting Name="______root_url_login" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.wclub888.com/Web/w-sport.aspx</Value>
+    </Setting>
+    <Setting Name="______WFT_running" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://sports.wclub888.com/_View/RMOdds2GenRun.aspx?ot=t&amp;update=false&amp;sa=false&amp;tv=0&amp;tf=-1&amp;TFStatus=0&amp;mt=0&amp;r=1038308059&amp;t=</Value>
+    </Setting>
+    <Setting Name="______WFT_not_running" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://sports.wclub888.com/_View/RMOdds2Gen.aspx?ot=t&amp;update=false&amp;sa=false&amp;tv=0&amp;tf=-1&amp;TFStatus=0&amp;mt=0&amp;r=342146139&amp;t=</Value>
+    </Setting>
+    <Setting Name="______TBS_running" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://sport.ugamingservice.com/api/grid/GetOdds</Value>
+    </Setting>
+    <Setting Name="______TBS_not_running" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://sport.ugamingservice.com/api/grid/GetOdds</Value>
+    </Setting>
+    <Setting Name="______username" Type="System.String" Scope="User">
+      <Value Profile="(Default)">nasrii042318</Value>
+    </Setting>
+    <Setting Name="______password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AAaa1111</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
